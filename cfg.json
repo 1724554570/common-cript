@@ -1,0 +1,11 @@
+{
+    "cdn": "",
+    "root": "",
+    "builds": "builds",
+    "publish": "./dist",
+    "semProject": "",
+    "htmlProject": "",
+    "html5cdn": "",
+    "html5": true,
+    "htmlMd5": true
+}
