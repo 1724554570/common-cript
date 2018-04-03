@@ -70,7 +70,7 @@ toCdnPlugin.prototype.apply = function (compiler) {
             }
             // console.log(data);
             request({
-                url: 'http://inner.up.cdn.qq.com:8080/uploadserver/uploadfile.jsp',
+                url: opts.xurl,
                 method: 'POST',
                 headers: {
                     'X-CDN-Authentication': opts.token

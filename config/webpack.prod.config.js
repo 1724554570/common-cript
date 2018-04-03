@@ -15,11 +15,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const pushFile_path = './pushFile/md5file/';
 // const uploadServer = 'qb20180124';
 // let webpackcfg = {
-//     "token": "7D1E69CE868DD68F4AD2A4F49C86B3BE",
-//     "username": "v_yuxjiang",
-//     "appname": "mig_market",
-//     "base": "http://3gimg.qq.com/",
-//     "path": "/activity/act/",
+//     "token": "",
+//     "username": "",
+//     "appname": "",
+//     "base": "",
+//     "path": "",
 //     "buildpath": uploadServer,
 //     "zipPath": pushFile_path
 // };
@@ -30,7 +30,7 @@ let webpackcfg = require("../webpackcfg.json");
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: '//3gimg.qq.com/mig_market/activity/act/qb20180124/',
+        publicPath: '',
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
