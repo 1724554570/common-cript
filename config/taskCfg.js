@@ -10,7 +10,6 @@ var task = {
 
     revCollectorCss: "revCollectorCss",
     revCollectorHtml: "revCollectorHtml",
-    revCollectorMobile: "revCollectorMobile",
     
     minCss: "minCss",
     minJs: "minJs",

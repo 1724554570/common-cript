@@ -3,8 +3,8 @@
     "root": "",
     "builds": "builds",
     "publish": "./dist",
-    "semProject": "",
-    "htmlProject": "",
+    "semProject": "./src",
+    "htmlProject": "./src",
     "html5cdn": "",
     "html5": true,
     "htmlMd5": true

@@ -1,4 +1,8 @@
+// (function () {
+
 function StorgeImpl() { }
+
+StorgeImpl.Version = "0.0.1";
 
 /**
  * window.sessionStorage.getItem
@@ -50,7 +54,7 @@ StorgeImpl.prototype.setCookie = function (opt) {
     }
     var expires = new Date();
     expires.setTime(expires.getTime() + times);
-    document.cookie = name + "=" + escape(value) + ";expires=" + expires.toGMTString();
+    document.cookie = opt.name + "=" + escape(opt.value) + ";expires=" + expires.toGMTString();
 }
 
 /**
@@ -60,11 +64,15 @@ StorgeImpl.prototype.setCookie = function (opt) {
 StorgeImpl.prototype.getCookie = function (name) {
     var start = document.cookie.indexOf(name + "=");
     var len = start + name.length + 1;
-    if (start == -1)
+    if (start == -1) {
         return null;
+    }
     var end = document.cookie.indexOf(';', len);
-    if (end == -1)
+    if (end == -1) {
         end = document.cookie.length;
+    }
+    // var rulesValue = document.cookie.replace(/(?:(?:^|.*;\s*)'+name+'\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    // return rulesValue;
     return unescape(document.cookie.substring(len, end));
 }
 
@@ -92,7 +100,6 @@ StorgeImpl.prototype.lgetItem = function (name, value) {
  */
 StorgeImpl.prototype.createStorge = function (opt, type) {
     var self = this;
-    console.log(this);
     switch (type) {
         case 'session':
             (window.sessionStorage)
@@ -134,12 +141,23 @@ StorgeImpl.prototype.createStorge = function (opt, type) {
 }
 
 StorgeImpl.prototype.getStorge = function (name) {
-    var self = this;
-    if (window.sessionStorage) { return self.getItem(name); }
-    if (window.localStorage) { return self.lgetItem(name); }
-    if (document.cookie) { return self.getCookie(name); }
-    return null;
+    var self = this, sessionvalue = null, localvalue = null, cookievalue = null;
+    if (window.sessionStorage) { sessionvalue = self.getItem(name); }
+    if (window.localStorage) { localvalue = self.lgetItem(name); }
+    if (document.cookie) { cookievalue = self.getCookie(name); }
+    return (sessionvalue || localvalue || cookievalue || null);
 }
 
+// RequireJS && SeaJS
+// if (typeof define === 'function') {
+//     define(function () {
+//         return new StorgeImpl();
+//     });
+//     // NodeJS
+// } else if (typeof exports !== 'undefined') {
+//     module.exports = new StorgeImpl();
+// } else {
+//     this.storge = new StorgeImpl();
+// }
 
-export default StorageData = new StorgeImpl();
+// })();

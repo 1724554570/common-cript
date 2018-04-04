@@ -54,29 +54,21 @@ let config = {
         // 源文件
         src: {
             font: opt.Proj_source + "/font/*",
-            tools: "./tools/*.js",
+            tools: "./src/tools/*.js",
             css: [
-                opt.Proj_source + "/*.css",
                 opt.Proj_source + "/**/*.css",
-                opt.Proj_source + "/**/**/*.css"
             ],
             js: [
-                opt.Proj_source + "/**.js",
-                opt.Proj_source + "/**/**.js",
-                opt.Proj_source + "/**/**/**.js"
+                opt.Proj_source + "/**/*.js",
             ],
             images: [
-                opt.Proj_source + "/**.{png,jpg,gif,ico}",
-                opt.Proj_source + "/**/**.{png,jpg,gif,ico}",
+                opt.Proj_source + "/**/*.{png,jpg,gif,ico}",
             ],
             jshtml: [
                 opt.Proj_source + "/js/**/**.html"
             ],
             html: [
-                opt.Proj_source + "/**.html",
-            ],
-            mobile: [
-                opt.Proj_source + "/**.html",
+                opt.Proj_source + "/**/*.html",
             ]
         },
         // MD5版本号文件
@@ -95,10 +87,6 @@ let config = {
             html: [
                 opt.rev_source + "/**.html",
                 opt.rev_source + "/**/**.html",
-            ],
-            mobile: [
-                opt.rev_source + "/**.html",
-                opt.rev_source + "/**/**.html",
             ]
         }
     },
@@ -115,16 +103,14 @@ let config = {
         revCollector: {
             img: opt.rev_source,
             css: opt.rev_source,
-            html: opt.rev_source,
-            mobile: opt.rev_source,
+            html: opt.rev_source
         },
         // 正式文件目录(压缩编译文件)
         dist: {
             images: opt.builds,
             css: opt.builds,
             js: opt.builds,
-            html: opt.builds,
-            mobile: opt.builds,
+            html: opt.builds
         },
         // 清除 开发调试文件 && 压缩编译文件
         clean: {

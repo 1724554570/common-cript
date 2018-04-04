@@ -27,21 +27,20 @@ var t_MD5 = [
 ];
 //版本替换
 var t_version = [
-    task.revCollectorCss,
-    task.revCollectorHtml,
-    // task.revCollectorMobile
+    // task.revCollectorCss,
+    task.revCollectorHtml
 ];
 //压缩文件
 var t_minFile = [
-    task.minHtml,
-    // task.minMobile,
-    task.minCss,
+    // task.minHtml,
+    // task.minCss,
     task.minJs,
-    task.minJsHtml,
-    task.minImage
+    // task.minJsHtml,
+    // task.minImage
 ];
 
 //正式构建
+// gulp.task("build", sequence(t_clean, t_jsHint, t_MD5, t_version, t_minFile));
 gulp.task("build", sequence(t_clean, t_jsHint, t_MD5, t_version, t_minFile));
 gulp.task("default", ["build"], function () { });
 
@@ -50,18 +49,3 @@ gulp.task("default", ["build"], function () { });
 //    gulp.watch(config.source.src.css, [task.revCollectorCss]);
 //    gulp.watch(config.source.revCollector.css, [task.minCss]);
 //});
-
-/**
- * 
- * 
- http://tc-svn.tencent.com/mqq/mqq_3gqq_rep/itil_wsd_proj/tags/ITIL_Framework/Proj_ITIL_MktActivity/Tag_20180328_build_001
-
-
-
-
-
-
-
- * 
- * 
- */
