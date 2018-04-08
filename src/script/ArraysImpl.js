@@ -1,16 +1,18 @@
+"use strict";
 /**
  * Arrays Tools
  */
-function ArraysImpl() {
-    this.Version = "0.0.1";
-}
+function ArraysImpl() { }
+
+ArraysImpl.Version = "0.0.1";
 
 /**
  * 显示变量类型
  * @param {*} o 
  */
 ArraysImpl.prototype.isType = function (o) {
-    return Object.prototype.toString.call(o);
+    // return Object.prototype.toString.call(o);
+    return ({}).toString.call(obj);
 };
 
 /**
@@ -19,16 +21,28 @@ ArraysImpl.prototype.isType = function (o) {
  * @param {*} count 数量
  */
 ArraysImpl.prototype.getRandomArrayElements = function (array, count) {
-    console.time("getRandomArrayElements time");
-    var shuffled = array.slice(0), i = array.length, min = i - count, temp, index;
+    var newArray = [], i = array.length, min = i - count, temp;
     while (i-- > min) {
-        index = Math.floor((i + 1) * Math.random());
-        temp = shuffled[index];
-        shuffled[index] = shuffled[i];
-        shuffled[i] = temp;
+        var index = Math.floor((i + 1) * Math.random());
+        newArray.push(array[index]);
     }
-    console.timeEnd("getRandomArrayElements time");
-    return shuffled.slice(min);
+    return newArray;
+};
+
+/**
+ * 数组去重
+ * @param {*} array 
+ */
+ArraysImpl.prototype.unique = function (array) {
+    var res = [], json = {}, i = 0, len = array.length;
+    for (i; i < len; i++) {
+        var type = ({}).toString.call(array[i]); // 不加类型 分不清 1 '1'
+        if (!json[array[i] + type]) {
+            json[array[i] + type] = 1;
+            res.push(array[i]);
+        }
+    }
+    return res;
 };
 
 ArraysImpl.prototype.duffsDevice = function (object) {
@@ -36,9 +50,7 @@ ArraysImpl.prototype.duffsDevice = function (object) {
     var iterations = Math.floor(object.length / 8),
         startAt = object.length % 8,
         i = 0;
-    console.time("duffsDevice");
-    var process = function (v) {
-    }
+    var process = function (v) { }
     do {
         switch (startAt) {
             case 0: process(object[i++]);
@@ -52,7 +64,4 @@ ArraysImpl.prototype.duffsDevice = function (object) {
         }
         startAt = 0;
     } while (--iterations);
-    console.timeEnd("duffsDevice");
 };
-
-

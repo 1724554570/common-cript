@@ -1,9 +1,7 @@
-/**
- * 
- */
-function RegExpImpl() {
-    this.Version = "0.0.1";
-}
+"use strict";
+function RegExpImpl() { }
+
+RegExpImpl.Version = "0.0.1";
 
 /**
  * Email正则匹配
@@ -31,3 +29,33 @@ RegExpImpl.prototype.url = function (value) {
     var rules = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
     return rules.test(value);
 }
+
+/**
+ * 替换所有标签,只有文字的结果
+ * @param {*} value 
+ */
+RegExpImpl.prototype.replaceHTML = function (value) {
+    var rules = /<\/?.*?>/g;
+    if (value) {
+        return value.replace(rules, '')
+    }
+    return null;
+};
+
+/**
+ * 提取字符串中的数字以数组方式返回
+ * @param {*} value 
+ */
+RegExpImpl.prototype.getStringNumber = function (value) {
+    var rules = /\d{1,}/g;
+    return value.match(rules);
+};
+
+/**
+ * 替换标点符号为 | 分割
+ * @param {*} value 
+ */
+RegExpImpl.prototype.replaceSymbol = function (value) {
+    var rules = /[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g;
+    return (value.toString()).replace(rules, '|');
+};

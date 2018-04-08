@@ -4,4 +4,6 @@
 /config/dist/*
 /node_modules/
 /node_modules/*
+/nbproject
+/nbproject/*
 package-lock.json

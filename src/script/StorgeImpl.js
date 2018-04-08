@@ -1,10 +1,10 @@
-// (function () {
-
+"use strict";
 function StorgeImpl() { }
 
 StorgeImpl.Version = "0.0.1";
 
 /**
+ * 获取Session缓存
  * window.sessionStorage.getItem
  * @param {*} name 
  */
@@ -19,6 +19,7 @@ StorgeImpl.prototype.getItem = function (name) {
 }
 
 /**
+ * 设置Session缓存
  * window.sessionStorage.setItem
  * @param {*} name 
  * @param {*} value 
@@ -77,6 +78,7 @@ StorgeImpl.prototype.getCookie = function (name) {
 }
 
 /**
+ * 设置本地缓存
  * window.localStorage.setItem
  * @param {*} name 
  * @param {*} value 
@@ -85,6 +87,7 @@ StorgeImpl.prototype.lsetItem = function (name, value) {
     window.localStorage.setItem(name, value);
 }
 /**
+ * 获取本地缓存
  * window.localStorage.getItem
  * @param {*} name 
  * @param {*} value 
@@ -147,17 +150,3 @@ StorgeImpl.prototype.getStorge = function (name) {
     if (document.cookie) { cookievalue = self.getCookie(name); }
     return (sessionvalue || localvalue || cookievalue || null);
 }
-
-// RequireJS && SeaJS
-// if (typeof define === 'function') {
-//     define(function () {
-//         return new StorgeImpl();
-//     });
-//     // NodeJS
-// } else if (typeof exports !== 'undefined') {
-//     module.exports = new StorgeImpl();
-// } else {
-//     this.storge = new StorgeImpl();
-// }
-
-// })();
