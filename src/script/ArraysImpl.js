@@ -12,7 +12,7 @@ ArraysImpl.Version = "0.0.1";
  */
 ArraysImpl.prototype.isType = function (o) {
     // return Object.prototype.toString.call(o);
-    return ({}).toString.call(obj);
+    return ({}).toString.call(o);
 };
 
 /**

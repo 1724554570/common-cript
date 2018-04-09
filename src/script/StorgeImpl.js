@@ -86,6 +86,7 @@ StorgeImpl.prototype.getCookie = function (name) {
 StorgeImpl.prototype.lsetItem = function (name, value) {
     window.localStorage.setItem(name, value);
 }
+
 /**
  * 获取本地缓存
  * window.localStorage.getItem

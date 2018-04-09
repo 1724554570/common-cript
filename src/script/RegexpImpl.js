@@ -10,7 +10,7 @@ RegExpImpl.Version = "0.0.1";
 RegExpImpl.prototype.email = function (value) {
     var rules = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     return rules.test(value);
-}
+};
 
 /**
  * 手机号码正则
@@ -19,7 +19,7 @@ RegExpImpl.prototype.email = function (value) {
 RegExpImpl.prototype.phone = function (value) {
     var rules = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
     return rules.test(value);
-}
+};
 
 /**
  * URL正则
@@ -28,7 +28,17 @@ RegExpImpl.prototype.phone = function (value) {
 RegExpImpl.prototype.url = function (value) {
     var rules = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
     return rules.test(value);
-}
+};
+
+/**
+ * 验证密码6到16位;字母或者数字
+ * @param {type} value
+ * @returns {undefined}
+ */
+RegExpImpl.prototype.password = function(value){
+    var rules = /^([0-9]|[a-zA-Z]){6,16}$/;
+    return rules.test(value);
+};
 
 /**
  * 替换所有标签,只有文字的结果
@@ -37,7 +47,7 @@ RegExpImpl.prototype.url = function (value) {
 RegExpImpl.prototype.replaceHTML = function (value) {
     var rules = /<\/?.*?>/g;
     if (value) {
-        return value.replace(rules, '')
+        return value.replace(rules, '');
     }
     return null;
 };
