@@ -26,3 +26,12 @@ var arr = regExpImpl.getStringNumber(str);
 console.log(arr);
 console.log(RegExpImpl.prototype);
 
+// 浏览器弹出输入
+// var n = parseInt(window.prompt('请输入n的次数'));
+// var p = 2;
+// for (var i = 0; i < n; i++) {
+//     p *= 2;
+// }
+// document.write(p+'\n')
+
+// document.write(p)

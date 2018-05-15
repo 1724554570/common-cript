@@ -15,24 +15,7 @@ function checkArray(baseSource, callArray) {
     return baseSource;
 }
 
-let params = {
-    gulp: require("gulp"),
-    sequence: require("gulp-sequence"), // 顺序执行
-    jsHint: require("gulp-jshint"), // js语法检测
-    minImage: require("gulp-imagemin"), // 图片压缩
-    minImageForPng: require("imagemin-pngquant"), // 图片压缩（png）
-    minCss: require("gulp-clean-css"), // css压缩
-    minJs: require("gulp-uglify"), // js压缩
-    minHtml: require("gulp-htmlmin"), // html压缩（js、css压缩）
-    minHtmlForJT: require("gulp-minify-html"), // html压缩（js模板压缩）
-    rev: require("gulp-rev"), // MD5版本号
-    revCollector: require("gulp-rev-collector"), // 版本替换
-    cache: require("gulp-cache"), // 缓存
-    clean: require('gulp-clean') // 清理文件
-};
-
-// Error color
-var chalk = require('chalk');
+let params = require('./lib');
 
 let gulp = params.gulp;
 let sequence = params.sequence;
@@ -45,6 +28,7 @@ let minHtml = params.minHtml;
 let minHtmlForJT = params.minHtmlForJT;
 let rev = params.rev;
 let revCollector = params.revCollector;
+let chalk = params.chalk;
 let cache = params.cache;
 let clean = params.clean;
 // 配置
@@ -77,31 +61,31 @@ function gulp_Action(gulp) {
     // MD5版本号
     gulp.task(task.revImage, function () {
         return gulp.src(config.source.src.images)
-            .pipe(rev())
-            .pipe(gulp.dest(config.md5file)) //- 输出文件本地
-            .pipe(rev.manifest({ filePath: MD5_server, flagmd5: false }))
-            .pipe(gulp.dest(config.dir.rev.image));
+                .pipe(rev())
+                .pipe(gulp.dest(config.md5file)) //- 输出文件本地
+                .pipe(rev.manifest({filePath: MD5_server, flagmd5: false}))
+                .pipe(gulp.dest(config.dir.rev.image));
     });
     gulp.task(task.revFont, function () {
         return gulp.src(config.source.src.font)
-            .pipe(rev())
-            .pipe(gulp.dest(config.md5file)) //- 输出文件本地
-            .pipe(rev.manifest({ filePath: MD5_server, flagmd5: FLAGMD5 }))
-            .pipe(gulp.dest(config.dir.rev.font));
+                .pipe(rev())
+                .pipe(gulp.dest(config.md5file)) //- 输出文件本地
+                .pipe(rev.manifest({filePath: MD5_server, flagmd5: FLAGMD5}))
+                .pipe(gulp.dest(config.dir.rev.font));
     });
     gulp.task(task.revCss, function () {
         return gulp.src(config.source.src.css)
-            .pipe(rev())
-            .pipe(gulp.dest(config.md5file)) //- 输出文件本地
-            .pipe(rev.manifest({ filePath: MD5_server, flagmd5: FLAGMD5 }))
-            .pipe(gulp.dest(config.dir.rev.css));
+                .pipe(rev())
+                .pipe(gulp.dest(config.md5file)) //- 输出文件本地
+                .pipe(rev.manifest({filePath: MD5_server, flagmd5: FLAGMD5}))
+                .pipe(gulp.dest(config.dir.rev.css));
     });
     gulp.task(task.revJs, function () {
         return gulp.src(config.source.src.js)
-            .pipe(rev())
-            .pipe(gulp.dest(config.md5file)) //- 输出文件本地
-            .pipe(rev.manifest({ filePath: MD5_server, flagmd5: FLAGMD5 }))
-            .pipe(gulp.dest(config.dir.rev.js));
+                .pipe(rev())
+                .pipe(gulp.dest(config.md5file)) //- 输出文件本地
+                .pipe(rev.manifest({filePath: MD5_server, flagmd5: FLAGMD5}))
+                .pipe(gulp.dest(config.dir.rev.js));
     });
 
     // 版本替换
@@ -116,11 +100,11 @@ function gulp_Action(gulp) {
      *  node_modules\rev-path\index.js
      *  10 return filename + '-' + hash + ext; => return filename + ext;
      
-       node_modules\gulp-rev-collector\index.js
-       31 if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !==  path.basename(key) ) {
-       OR
-       42 if (!~){  =>
-       if ( path.basename(json[key]).split('?')[0] !== path.basename(key) ) {
+     node_modules\gulp-rev-collector\index.js
+     31 if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) !==  path.basename(key) ) {
+     OR
+     42 if (!~){  =>
+     if ( path.basename(json[key]).split('?')[0] !== path.basename(key) ) {
      * 
      *  对插件进行如下修改，使得引用资源文件的url得以如下变换：
      *  "/css/base-f7e3192318.css" >> "http/https:xxxxxxx/css/base.css?v=f7e3192318"
@@ -128,14 +112,14 @@ function gulp_Action(gulp) {
      *  ---- opts = objectAssign(); 增加 filePath: '', 开启远程文件路径
      *  ---- opts = objectAssign(); 增加 flagmd5: '',  true开启远程文件md5版本，false开启远程文件非md5版本
      *
-        
-        // manifest[originalFile] = revisionedFile;
-        if(opts.flagmd5){
-			manifest[originalFile] = opts.filePath + revisionedFile;
-		}else{
-			manifest[originalFile] = opts.filePath + originalFile;
-        }
-        
+     
+     // manifest[originalFile] = revisionedFile;
+     if(opts.flagmd5){
+     manifest[originalFile] = opts.filePath + revisionedFile;
+     }else{
+     manifest[originalFile] = opts.filePath + originalFile;
+     }
+     
      * 
      * 
      */
@@ -162,12 +146,12 @@ function gulp_Action(gulp) {
     gulp.task(task.minJs, function () {
         let srcSou = checkArray([], config.source.src.js);
         return gulp.src(srcSou)
-            .pipe(uglify().on('error', function (e) {
-                console.log("Error fileName " + chalk.red(e.fileName));
-                console.log("Error lineNumber " + chalk.red(e.lineNumber));
-                // console.log(e);
-            }))
-            .pipe(gulp.dest(config.dir.dist.js));
+                .pipe(uglify().on('error', function (e) {
+                    console.log("Error fileName " + chalk.red(e.fileName));
+                    console.log("Error lineNumber " + chalk.red(e.lineNumber));
+                    // console.log(e);
+                }))
+                .pipe(gulp.dest(config.dir.dist.js));
     });
 
     let public_parms = function () {
@@ -187,25 +171,25 @@ function gulp_Action(gulp) {
     gulp.task(task.minJsHtml, function () {
         let srcSou = checkArray([], config.source.src.jshtml);
         return gulp.src(srcSou)
-            //.pipe(minHtmlForJT()) //附带压缩页面上的js模板
-            //.pipe(minHtml(public_parms())) //附带压缩页面上的css、js
-            .pipe(gulp.dest(config.dir.dist.js));
+                //.pipe(minHtmlForJT()) //附带压缩页面上的js模板
+                //.pipe(minHtml(public_parms())) //附带压缩页面上的css、js
+                .pipe(gulp.dest(config.dir.dist.js));
     });
 
     // PC 版
     gulp.task(task.minHtml, function () {
         let srcSou = checkArray([], config.source.revCollector.html);
         return gulp.src(srcSou)
-            //.pipe(minHtmlForJT()) //附带压缩页面上的js模板
-            //.pipe(minHtml(public_parms())) //附带压缩页面上的css、js
-            .pipe(gulp.dest(config.dir.dist.html));
+                //.pipe(minHtmlForJT()) //附带压缩页面上的js模板
+                //.pipe(minHtml(public_parms())) //附带压缩页面上的css、js
+                .pipe(gulp.dest(config.dir.dist.html));
     });
 
     gulp.task(task.minImage, function () {
         let srcSou = checkArray([], config.source.src.images);
         return gulp.src(srcSou)
-            .pipe(cache(minImage({ progressive: true, use: [minImageForPng()] })))
-            .pipe(gulp.dest(config.dir.dist.images));
+                .pipe(cache(minImage({progressive: true, use: [minImageForPng()]})))
+                .pipe(gulp.dest(config.dir.dist.images));
     });
 }
 
