@@ -53,12 +53,10 @@ if(opts.fileHash){
 ```
 修改 node_modules\gulp-rev\index.js ---修改代码第123行。
 增加参数设置或配置 manifest({filePath:'',fileHash:''}); 传入(以支持144行代码判断)；
-增加 filePath: '', 开启远程文件路径；
-增加 fileHash: '',  true开启远程文件md5版本，false开启远程文件非md5版本；
 ```js
 opts = objectAssign({
-    filePath: '',
-    fileHash: '',
+    filePath: '', //开启远程文件路径；
+    fileHash: '', //true开启远程文件hash版本，false开启远程文件非hash版本；
 });
 ```
 新增过滤非css和非js后缀名文件或者所有文件不启用hash；修改 node_modules\gulp-rev\index.js ---修改代码第51行。
