@@ -25,3 +25,25 @@
     "html5": true,              是否为html5项目
     "htmlMd5": true             是否进行html5项目Md5文件名
 }
+
+
+# Gulp 打包静态文件使用参数形式Hash后缀, 格式: base.css?v=f7e3192318
+修改 node_modules\gulp-rev-collector\index.js 代码41行
+```js
+if (!~[
+        path.basename(key),
+        _mapExtnames(path.basename(key), opts)
+    ].indexOf(cleanReplacement)
+) {
+    isRev = 0;
+}
+```
+为
+```js
+if ( path.basename(json[key]).split('?')[0] !== path.basename(key) ) {
+    isRev = 0;
+}
+```
+
+
+
