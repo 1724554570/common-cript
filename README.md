@@ -27,7 +27,7 @@
 }
 
 
-# Gulp 打包静态文件使用参数形式Hash后缀, 格式: base.css?v=f7e3192318
+## Gulp 打包静态文件使用参数形式Hash后缀, 格式: base.css?v=f7e3192318
 修改 node_modules\gulp-rev-collector\index.js 代码41行
 ```js
 if (!~[
