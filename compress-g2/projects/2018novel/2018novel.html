@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>乾隆后宫生存测试
+
+            乾隆后宫生存测试
+        </title>
+        <meta charset="UTF-8">
+        <link href="css/app.css" rel="stylesheet">
+        <script>
+            window.moziArgs = {
+                "appid": "2n5cn1epijma72gab",
+                "host": "ws://mozi.m.qq.com",
+                "enable": true
+            };
+            function getTypeHtml(currentAttrs) {
+                if (currentAttrs && currentAttrs[0] && currentAttrs[0].value.toLowerCase() === 'text/html') {
+                    return true;
+                }
+                return false;
+            }
+        </script>
+
+    <body>
+        <script type="text/html" id="caseTpl">
+            {{if key<=0&&item.example&&item.example.length>0}} 
+                <div class="container" > 
+                <h5 class="area2_tite">{{item.title}}</h5>
+                <div class="area2_content">
+            {{/if}}
+                    {{if item.example&&item.example.length>0}}
+                    {{each item.example}}
+                    <div class="area2_content_item">
+                        <a href="{{$value.id | redirectPath:list.id,'example'}}">
+                            <img src="{{$value.pic}}" alt="">
+                            <p>{{$value.title | subStringLenth}}</p>
+                        </a>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+            {{if key<=0&&item.example&&item.example.length>0}}
+                </div>
+                </div>
+            {{/if}}
+    </script>
+    <div class="contain loading hide">
+        <img src="img/ico6.png" alt="" class="bg" />
+    </div>
+    <script src="js/jquery.cookie.js"></script>
+</body>
+
+</html>
