@@ -3,6 +3,7 @@
 
 
 # webpackcfg.json 打包上传文件,
+```json
 {
     "token": "",                上传KEY
     "username": "",             用户昵称
@@ -12,8 +13,10 @@
     "buildpath": "",            上传最终位置
     "zipPath": ""               打包路径
 }
+```
 
 # cfg.json 使用cdn地址配置,需要修改 node_modules 插件
+```json
 {
     "cdn": "",                  sem项目文件的cdn路径
     "root": "",                 项目root路径
@@ -25,3 +28,4 @@
     "html5": true,              是否为html5项目
     "htmlMd5": true             是否进行html5项目Md5文件名
 }
+```
