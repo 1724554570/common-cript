@@ -1,0 +1,50 @@
+//out:../stylesheets/
+/*** navigation ***/
+
+.nav {
+    &-header {
+        position: relative;
+        border-bottom: 1px solid #000;
+        padding: 12px 0;
+    }
+    &-header {
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+    &-container {
+        width: 100%;
+        max-width: 1100px;
+        margin: auto;
+    }
+    &-list {
+        overflow: hidden;
+        text-align: center;
+    }
+    &-item {
+        // float: left;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 2px;
+        overflow: hidden;
+        // padding: 0 12px;
+    }
+    &-item {
+        a {
+            display: block;
+            color: #000;
+            text-decoration: none;
+            padding: 3px 9px;
+        }
+        &:hover {
+            // a{color: #fff;}
+            background: rgba(0, 0, 0, 0.1);
+        }
+        &.active {
+            // a{color: #fff;}
+            background: rgba(0, 0, 0, 0.1);
+        }
+    }
+}

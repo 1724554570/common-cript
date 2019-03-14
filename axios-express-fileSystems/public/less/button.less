@@ -1,0 +1,38 @@
+// out:../stylesheets/
+.btn {
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    /**/
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    /**/
+    .btn {
+        &-child {
+            color: #fff;
+            display: block;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
+    }
+
+    &:hover{
+        opacity: 0.95;
+    }
+
+}
+
+.btn {
+    &.btn{
+        &-5dd5c8{
+            background: #5dd5c8;
+        }
+        &-pink{
+            color: #fff!important;
+            background-color: #ff4081!important;
+        }
+    }
+}

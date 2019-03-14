@@ -9,8 +9,8 @@ const fileBasePath = 'uploads';
 const chunkBasePath = '~uploads';
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
+router.get('/', (req, res, next) => {
+    res.render('index', { title: 'Express', h: 'active' });
 });
 
 // 上传chunks
@@ -66,8 +66,6 @@ router.post('/merge_chunks', (req, res) => {
         // 删除chunk的文件夹
         // fs.rmdirSync(chunkDir);
         // 返回uploads下的路径，不返回uploads
-        // savePath.split(fileBasePath)[savePath.split(fileBasePath).length - 1]
-        // savePath.replace(`${fileBasePath}/`, '')
         res.json({ code: 0, msg: '文件上传成功', data: { path: savePath.replace(`${fileBasePath}/`, '') } });
     } catch (err) {
         res.json({ code: -1, msg: '出现异常,上传失败' });
@@ -101,5 +99,10 @@ router.get('/getfilelist', (req, res) => {
     let result = getFilePathAction(req, res);
     res.render('file-list', { title: '文件列表', chunks: result.chunks, path: result.rootPath });
 });
+
+router.get('/fileupload', (req, res) => {
+    res.render('files/upload', { title: '文件上传', o: 'active' });
+});
+
 
 module.exports = router;
