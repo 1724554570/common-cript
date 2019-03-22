@@ -11,16 +11,15 @@ ArraysImpl.Version = "0.0.1";
  * @param {*} o 
  */
 ArraysImpl.prototype.isType = function (o) {
-    // return Object.prototype.toString.call(o);
-    return ({}).toString.call(o);
+    return Object.prototype.toString.call(o);
 };
 
 /**
- * 数组随机取出一个元素或者几个元素。
+ * 给定一个数组随机取出一个元素或多个元素。
  * @param {*} array 数组
- * @param {*} count 数量
+ * @param {*} count 个数
  */
-ArraysImpl.prototype.getRandomArrayElements = function (array, count) {
+ArraysImpl.prototype.getRandomArray = function (array, count) {
     var newArray = [], i = array.length, min = i - count, temp;
     while (i-- > min) {
         var index = Math.floor((i + 1) * Math.random());
@@ -36,7 +35,7 @@ ArraysImpl.prototype.getRandomArrayElements = function (array, count) {
 ArraysImpl.prototype.unique = function (array) {
     var res = [], json = {}, i = 0, len = array.length;
     for (i; i < len; i++) {
-        var type = ({}).toString.call(array[i]); // 不加类型 分不清 1 '1'
+        var type = this.isType(array[i]); // 不加类型 分不清 1 '1'
         if (!json[array[i] + type]) {
             json[array[i] + type] = 1;
             res.push(array[i]);

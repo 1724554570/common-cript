@@ -263,7 +263,7 @@
     // 静态分析模板变量
     var KEYWORDS =
         // 关键字
-        '~,let,break,case,catch,continue,debugger,default,delete,do,else,false' +
+        '~,break,case,catch,continue,debugger,default,delete,do,else,false' +
         ',finally,for,function,if,in,instanceof,new,null,return,switch,this' +
         ',throw,true,try,typeof,var,void,while,with'
 
@@ -478,47 +478,6 @@
             });
             return code + "\n";
         }
-    }
-
-    /**
-     * 
-     * @param {type} key
-     * @returns {String}
-     */
-    function get_colon_value(key) {
-        var v = key.split(":");
-        return "http://" + v[0] + ".oss-cn-beijing.aliyuncs.com/" + v[1];
-    }
-    /**
-     * 格式化Aliyun服务器图片
-     * @param {type} input
-     * @param {type} flag
-     * @returns {String}
-     */
-    function getOssDownLoad(input, flag) {
-        var falg1 = new RegExp("127.0.0.1").test(input);
-        var t = (typeof flag !== 'undefined' && flag) ? flag : false;
-        if (falg1 && !t) {
-            return input;
-        }
-        if (input) {
-            var splits = input.split(";");
-            var i = 0,
-                len = splits.length,
-                str = '';
-            for (i; i < len; i++) {
-                if (splits[i] === '') {
-                    continue;
-                }
-                if (t) {
-                    str += '<div class="uploadImg" data-uploadSrc="' + splits[i] + '"><div class="transhBtn"><i class="ivu-icon2 fa fa-times-circle"></i></div><img src="' + get_colon_value(splits[i]) + '" alt=""/></div>';
-                } else {
-                    str = get_colon_value(splits[i]);
-                }
-            }
-            return str;
-        }
-        return '';
     }
 
     // 定义模板引擎的语法

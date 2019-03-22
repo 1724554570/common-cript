@@ -350,4 +350,11 @@ html,body{
 }
 .music_box.off img:nth-child(2){
 	display: block;
+}.answer_box li{
+	position: relative;
+	background-image: url(img/ico6.png);
+	background-size: 100% auto;
+	width: 4.87rem;
+	height: 1.02rem;
+	margin-bottom: .12rem;
 }

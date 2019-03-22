@@ -8,8 +8,6 @@ let isHtml5Activity = true;
 let staticHash = true;
 let uploadPath = (staticHash ? versionPath + '/' : compressPath + '/');
 let semPath = 180813;
-//let html5Path = 'uploads';
-//let html5Path = '../brausen_pc2';
 let html5Path = '2018novel';
 
 /**

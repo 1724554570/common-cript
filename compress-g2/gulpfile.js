@@ -34,37 +34,16 @@
         task.minHtml,
         task.minCss,
         task.minJs,
-//        task.minImage,
+        task.minImage,
         task.copy
     ];
     //正式构建
     gulp.task("build", sequence(t_clean, t_jsHint, t_MD5, t_version, t_minFile));
     gulp.task("default", ["build"], function () { });
-    
-//    gulp.task("default", gulp.series(
-//        task.revImage,
-//        task.revFont,
-//        task.revCss,
-//        task.revJs,
-//        // task.revCollectorCss,
-//        task.revCollectorHtml,
-//        task.minJsHtml,
-//        task.minHtml,
-//        task.minCss,
-//        task.minJs,
-//        task.minImage,
-//        task.copy,
-//        (done) => {
-//            console.log(done);
-//        }));
 
     // 热更新Css 
     gulp.task("watch", [task.revCollectorCss, task.minCss], function () {
         gulp.watch(config.source.src.css, [task.revCollectorCss]);
         gulp.watch(config.source.revCollector.css, [task.minCss]);
     });
-    //gulp.task("watch", gulp.series(task.revCollectorCss, task.minCss, function () {
-    //    gulp.watch(config.source.src.css, [task.revCollectorCss]);
-    //    gulp.watch(config.source.revCollector.css, [task.minCss]);
-    //}));
 })();

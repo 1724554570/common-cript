@@ -1,6 +1,11 @@
 ## 版本替换
 version 0.0.1
 
+## 库文件安装
+```sh
+
+```
+
 ## _html5_cfg.js
 gulp 和 webpack 打包配置选项
 
@@ -90,6 +95,40 @@ manifest[originalFile] = originalFile + '?v=' + file.revHash;
 ```
 
 
+## 压缩javascript模版引擎: 
+
+```
+    // node_modules\gulp-htmlmin\node_modules\html-minifier\src\htmlminifier.js
+    // new HTMLParser(value, {chars:function(){ }})
+    // isExecutableScript(currentTag, currentAttrs)
+    // }
+
+    //
+        //if(getTypeHtml(currentAttrs)){
+        //   text = text.replace(/\r\n/g,"");
+        //}
+        if(getTypeHtml(currentAttrs)){
+          //text = text.replace(/\r\n/g,"");
+          var textArray = text.split(/\r\n/g);
+          var text1 = textArray.map((item,key)=>{
+              return item.trims('lr');
+          });
+          text = text1.join('');
+        }
+
+  
+    function getTypeHtml(currentAttrs) {
+        if (currentAttrs && currentAttrs[0] && currentAttrs[0].value.toLowerCase() === 'text/html') {
+            return true;
+        }
+        return false;
+    }
+    String.prototype.trims = function(type){
+        type = (type||'lr').toLowerCase();
+        return type==="lr"?this.replace(/(^\s*)|(\s*$)/g, ""):type==='l'? this.replace(/(^\s*)/g, ""):type==='r'? this.replace(/(^\s*)/g, ""):'';
+    };
+```
+
 ## old package
 ```
 {
@@ -127,36 +166,4 @@ manifest[originalFile] = originalFile + '?v=' + file.revHash;
         "webpack-merge": "^4.1.1"
     }
 }
-```
-
-```
-    // node_modules\gulp-htmlmin\node_modules\html-minifier\src\htmlminifier.js
-    // new HTMLParser(value, {chars:function(){ }})
-    // isExecutableScript(currentTag, currentAttrs)
-    // }
-
-    //
-        //if(getTypeHtml(currentAttrs)){
-        //   text = text.replace(/\r\n/g,"");
-        //}
-        if(getTypeHtml(currentAttrs)){
-          //text = text.replace(/\r\n/g,"");
-          var textArray = text.split(/\r\n/g);
-          var text1 = textArray.map((item,key)=>{
-              return item.trims('lr');
-          });
-          text = text1.join('');
-        }
-
-  
-    function getTypeHtml(currentAttrs) {
-        if (currentAttrs && currentAttrs[0] && currentAttrs[0].value.toLowerCase() === 'text/html') {
-            return true;
-        }
-        return false;
-    }
-    String.prototype.trims = function(type){
-        type = (type||'lr').toLowerCase();
-        return type==="lr"?this.replace(/(^\s*)|(\s*$)/g, ""):type==='l'? this.replace(/(^\s*)/g, ""):type==='r'? this.replace(/(^\s*)/g, ""):'';
-    };
 ```

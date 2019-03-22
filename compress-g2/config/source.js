@@ -21,7 +21,7 @@ let config = {
     source: {
         // 源文件
         src: {
-            copyFile: project + "/**/**.{mp3,json,swf,woff,woff2}",//,eot,svg,ttf
+            copyFile: project + "/**/**.{mp3,json,swf,woff,woff2,eot,svg,ttf}",
             tools: "./tools/*.js",
             images: [project + "/**/**.{png,jpg,gif,ico}"],
             font: project + "/font/*",
@@ -36,8 +36,8 @@ let config = {
         },
         // 替换版本后的文件
         revCollector: {
-            js: [version + "/**/**.js"],
-            css: [version + "/**/**.css"],
+            JS: [version + "/**/**.js"],
+            CSS: [version + "/**/**.css"],
             html: [pushRevCollector + "/**/**.html"]
         }
     },

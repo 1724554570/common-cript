@@ -33,31 +33,33 @@ function MainInitialization(action) {
  */
 MainInitialization.prototype.revFiles = function () {
     var gulp = this.gulp;
+    // 缓存文件路径
+    var cachePath = config.dir.dist.version;
     gulp.task(task.revImage, function () {
         return gulp.src(config.source.src.images)
                 .pipe(rev())
-                .pipe(gulp.dest(config.dir.dist.version)) //- 输出文件本地
+                .pipe(gulp.dest(cachePath))
                 .pipe(rev.manifest("image-manifest.json", {filePath: config.CDN, fileHash: config.IMAGES_Hash}))
                 .pipe(gulp.dest(config.dir.rev.revFile));
     });
     gulp.task(task.revFont, function () {
         return gulp.src(config.source.src.font)
                 .pipe(rev())
-                .pipe(gulp.dest(config.dir.dist.version)) //- 输出文件本地
+                .pipe(gulp.dest(cachePath))
                 .pipe(rev.manifest("fonts-manifest.json", {filePath: config.CDN, fileHash: config.SCRIPT_Hash}))
                 .pipe(gulp.dest(config.dir.rev.revFile));
     });
     gulp.task(task.revCss, function () {
         return gulp.src(config.source.src.css)
                 .pipe(rev())
-                .pipe(gulp.dest(config.dir.dist.version)) //- 输出文件本地
+                .pipe(gulp.dest(cachePath))
                 .pipe(rev.manifest("style-manifest.json", {filePath: config.CDN, fileHash: config.SCRIPT_Hash}))
                 .pipe(gulp.dest(config.dir.rev.revFile));
     });
     gulp.task(task.revJs, function () {
         return gulp.src(config.source.src.js)
                 .pipe(rev())
-                .pipe(gulp.dest(config.dir.dist.version)) //- 输出文件本地
+                .pipe(gulp.dest(cachePath))
                 .pipe(rev.manifest("script-manifest.json", {filePath: config.CDN, fileHash: config.SCRIPT_Hash}))
                 .pipe(gulp.dest(config.dir.rev.revFile));
     });
@@ -110,25 +112,19 @@ MainInitialization.prototype.compressFiles_Html = function () {
         };
     };
 
-    var opts = {
-        empty: true,
-        comments: true
-    };
-
-    // 扫描压缩javascript模版输出
+    // 压缩javascript模版
     gulp.task(task.minJsHtml, function () {
         let srcSou = checkArray([], config.source.src.jshtml);
         return gulp.src(srcSou)
-                .pipe(minHtmlForJT()) // 附带压缩页面上的javascript模板
-                .pipe(minHtml(public_parms()))// 附带压缩页面上的style,javascript
+                .pipe(minHtmlForJT()) // 压缩页面上的javascript模板
+                .pipe(minHtml(public_parms()))// 压缩页面上的style,javascript
                 .pipe(gulp.dest(config.dir.dist.release));
     });
-//text/html
+
     // PC 版
     gulp.task(task.minHtml, function () {
         let srcSou = checkArray([], config.source.revCollector.html);
         return gulp.src(srcSou)
-                //.pipe(minHtmlForJT(Object.assign({}, opts, {minHtmlForJT: true})))
                 .pipe(minHtml(public_parms()))
                 .pipe(gulp.dest(config.dir.dist.release))
                 .pipe(gulp.dest(config.dir.dist.version));
@@ -144,26 +140,26 @@ MainInitialization.prototype.compressFiles_CSSJS = function () {
 
     let releasePath = config.dir.dist.release;
     gulp.task(task.minCss, function () {
-        let srcSou = checkArray([], config.staticHash ? config.source.revCollector.css : config.source.src.css);
+        let srcSou = checkArray([], config.staticHash ? config.source.revCollector.CSS : config.source.src.css);
         return gulp.src(srcSou).pipe(minCss()).pipe(gulp.dest(releasePath));
     });
 
     gulp.task(task.minJs, function () {
-        let srcSou = checkArray([], config.staticHash ? config.source.revCollector.js : config.source.src.js);
+        let srcSou = checkArray([], config.staticHash ? config.source.revCollector.JS : config.source.src.js);
         return gulp.src(srcSou)
-                .pipe(uglify({
-                    toplevel: !0,
-                    comments: true,
-                    sourceMap: true,
-                    mangle: false,
-                    compress: false,
-                    //compress: {sequences: false,passes: 2},
-                    output: {
-                        beautify: false
-                    }
-                }).on('error', function (e) {
-                    console.log("Error  " + chalk.red(e));
+                .pipe(uglify({}).on('error', function (e) {
+                    console.log("---------- minJs-Error ----------");
+                    console.log(chalk.red(e));
+                    console.log("---------- minJs-Error ----------");
                 }))
+                .pipe(gulp.dest(releasePath));
+    });
+
+    // 压缩图片文件
+    gulp.task(task.minImage, function () {
+        let srcSou = checkArray([], config.source.src.images);
+        return gulp.src(srcSou)
+                .pipe(cache(minImage({progressive: false, use: [minImageForPng()]})))
                 .pipe(gulp.dest(releasePath));
     });
 };
@@ -182,30 +178,25 @@ module.exports = function (gulp) {
         return gulp.src(srcSou).pipe(clean());
     });
 
+    // 复制{mp3,json,swf,woff,woff2}类型文件到发布目录下
+    gulp.task(task.copy, function () {
+        let srcSou = checkArray([], config.source.src.copyFile);
+        return gulp.src(srcSou).pipe(gulp.dest(config.dir.dist.release));
+    });
+
     // js语法检测
     gulp.task(task.jsHint, function () {
         let srcSou = checkArray([], config.source.src.tools);
         gulp.src(srcSou).pipe(jsHint().on('error', function (e) {
-            console.log("Error  " + chalk.red(e));
+            console.log("---------- jsHint-Error ----------");
+            console.log(chalk.red(e));
+            console.log("---------- jsHint-Error ----------");
         })).pipe(jsHint.reporter());
     });
 
-    new MainInitialization(gulp).revFiles();
-    new MainInitialization(gulp).replaceFilesPath();
-    new MainInitialization(gulp).compressFiles_Html();
-    new MainInitialization(gulp).compressFiles_CSSJS();
-
-    // 压缩图片文件
-    gulp.task(task.minImage, function () {
-        let srcSou = checkArray([], config.source.src.images);
-        return gulp.src(srcSou)
-                .pipe(cache(minImage({progressive: false, use: [minImageForPng()]})))
-                .pipe(gulp.dest(config.dir.dist.release));
-    });
-
-    // 复制{mp3,json,swf,woff,woff2}类型文件到发布目录下
-    gulp.task(task.copy, function () {
-        let srcSou = checkArray([], config.source.src.copyFile);
-        return gulp.src(srcSou).pipe(gulp.dest(config.dir.dist.release)).pipe(gulp.dest(config.dir.dist.version));
-    });
+    let mainInit = new MainInitialization(gulp);
+    mainInit.revFiles();
+    mainInit.replaceFilesPath();
+    mainInit.compressFiles_Html();
+    mainInit.compressFiles_CSSJS();
 };

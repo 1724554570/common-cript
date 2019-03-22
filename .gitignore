@@ -1,23 +1,18 @@
+.idea/
+.idea*
 
 /nbproject
 /nbproject/*
-
-compress-1/dist/
-compress-1/dist/*
-compress-1/config/dist/
-compress-1/config/dist/*
-compress-1/node_modules/
-compress-1/node_modules/*
 
 compress-g2/question.md
 compress-g2/package-lock.json
 compress-g2/node_modules/*
 compress-g2/pushFile/
 
+file-systems/~uploads
+file-systems/~uploads/*
+file-systems/uploads/*
+file-systems/node_modules/*
+file-systems/package-lock.json
 
-
-axios-express-fileSystems/~uploads
-axios-express-fileSystems/~uploads/*
-axios-express-fileSystems/uploads/*
-axios-express-fileSystems/node_modules/*
-axios-express-fileSystems/package-lock.json
+test.js

@@ -9,11 +9,11 @@ var arraysImpl = new ArraysImpl();
 var arrayString = ["aa", "bb", "cc", "dd", "ee"];
 var numbers = 2;
 console.time("arrayString");
-for (var i = 0; i < 1 * numbers * 1000; i++) {
+for (var i = 0; i < 1 * numbers * 10000; i++) {
     arrayString.push("aa" + i + "k");
 }
 console.timeEnd("arrayString");
-console.log(arraysImpl.getRandomArrayElements(arrayString, 1 * numbers));
+console.log(arraysImpl.getRandomArray(arrayString, 1 * numbers));
 
 // 去重
 var arr = [1, 2, 3, 3, 3, '0', '1', '2', '测试', '重复', '重复', NaN, NaN, false, false];
