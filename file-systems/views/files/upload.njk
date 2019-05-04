@@ -98,7 +98,7 @@
      * @param handleXhrErrorCallback // 请求失败事件
      */
     function fileSliceUpload(file,handleXhrProgressCallback,handleXhrSuccessCallback,handleXhrErrorCallback){
-        const eachSize = 2 * 1024 * 10 ; // 每个chunks的大小
+        const eachSize = 2 * 1024 * 1024 ; // 每个chunks的大小
         const blockCount = Math.ceil(file.size / eachSize); // 分片总数
         const axiosArray = []; // axiosPromise数组
         let ext = file.name.split('.');

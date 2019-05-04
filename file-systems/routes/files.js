@@ -57,7 +57,7 @@ router.post('/merge_chunks', (req, res) => {
     const D = new Date();
     const total = _object.total;
     const hash = _object.hash;
-    const saveDir = `${fileBasePath}/${D.getFullYear()}${D.getMonth() + 1}${D.getDate()}`;
+    const saveDir = `${fileBasePath}/${D.getFullYear()}${D.getMonth() + 1<10?('0'+D.getMonth() + 1):'0'+D.getMonth() + 1}${D.getDate()<10?('0'+D.getDate()):D.getDate()}`;
     const savePath = `${saveDir}/${hash}.${_object.ext}`;
     const chunkDir = `${chunkBasePath}/${hash}/`;
     try {
