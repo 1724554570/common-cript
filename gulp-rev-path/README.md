@@ -20,3 +20,16 @@
 var rev = require('gulp-rev-path');
     rev.manifest({filePath: "", fileHash: false});
 ```
+
+### 预设调整调用方式
+```js
+    if(opts.fileFunc && typeof opts.fileFunc === 'function'){
+        opts.fileFunc(revisionedFile, originalFile, manifest, opts);
+    }else{
+        if (opts.filePath && opts.fileHash) {
+            manifest[originalFile] = opts.filePath + revisionedFile;
+        }
+        //manifest[originalFile] = revisionedFile;
+        manifest[originalFile] = originalFile;
+    }
+```

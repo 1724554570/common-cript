@@ -1,0 +1,24 @@
+//out:false
+@green: #4db14d;
+.btn-button {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em 1em;
+    background-color: @green;
+    color: #fff;
+    outline: 0;
+    font-size: 15pt;
+    &:focus {
+        background-color: darken(#4db14d, 10%)
+    }
+    &.outline {
+        border: 1px solid #999;
+        background-color: #fff;
+        color: #555;
+        &:hover {
+            border-color: @green;
+            color: @green;
+        }
+    }
+}
