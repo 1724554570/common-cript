@@ -26,8 +26,7 @@ let paramsLib = {
     uglify          : require("gulp-uglify"),//js压缩
     minHtml         : require("gulp-htmlmin"),//html压缩（js、css压缩）
     minHtmlForJT    : require("gulp-minify-html"),//html压缩（js模板压缩）
-    // rev             : require("gulp-rev"),//MD5版本号
-    rev             : require("gulp-rev-path"),//MD5版本号
+	rev             : require("@miop/rev"),//MD5版本号
     revCollector    : require("gulp-rev-collector"),//版本替换
     chalk           : require("chalk"),//Error color
     cache           : require("gulp-cache"),//缓存

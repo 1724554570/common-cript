@@ -8,6 +8,7 @@ compress-g2/question.md
 compress-g2/package-lock.json
 compress-g2/node_modules/*
 compress-g2/pushFile/
+compress-g2/yarn.lock
 
 file-systems/~uploads
 file-systems/~uploads/*
