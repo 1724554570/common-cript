@@ -3,10 +3,10 @@ const multer = require('multer');
 const chunksBasePath = '~uploads/';
 
 const storage = multer.diskStorage({
-    destination:chunksBasePath,
+    destination: chunksBasePath,
 });
 
-const baseUpload = multer({storage});
+const baseUpload = multer({ storage });
 const upload = baseUpload.single('file');
 
 /**
@@ -16,12 +16,12 @@ const upload = baseUpload.single('file');
  * @param {*} res
  * @param {*} next
  */
-const uploadMiddleware = (req,res,next)=>{
-    upload(req,res,(err)=>{
-        if(err){
+const uploadMiddleware = (req, res, next) => {
+    upload(req, res, (err) => {
+        if (err) {
             // 进行错误捕获
-            res.json({code:-1,msg:err.toString()});
-        }else{
+            res.json({ code: -1, msg: err.toString() });
+        } else {
             next();
         }
     });

@@ -26,7 +26,7 @@ function getFilePathAction(req, res) {
 
 // 上传页面
 router.get('/fileupload', (req, res) => {
-    res.render('files/upload', { title: '文件上传', o: 'active' });
+    res.render('files/upload', { title: '文件管理系统', o: 'active' });
 });
 
 // 上传chunks

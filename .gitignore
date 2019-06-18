@@ -15,5 +15,6 @@ file-systems/~uploads/*
 file-systems/uploads/*
 file-systems/node_modules/*
 file-systems/package-lock.json
+file-systems/yarn.lock
 
 test.js

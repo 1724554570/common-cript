@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    res.render('index', { title: 'Express st', h: 'active' });
+    res.render('index', { title: '文件管理系统', className: 'active' });
 });
 
 module.exports = router;
