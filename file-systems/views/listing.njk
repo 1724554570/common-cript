@@ -3,6 +3,23 @@
 {% block header %}
     <title>文件列表</title>
 {% endblock %}
+{% block stylesheet %}
+    <style>
+        .list {
+            margin-top: 20px;
+        }
+        .list li {
+            list-style: none;
+            line-height: 28px;
+        }
+        .list li a {
+            display: block;
+        }
+        .list li:hover {
+            background: #EDEDED;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <ul class="list">
         {% for item in chunks -%}
