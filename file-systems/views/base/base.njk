@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% block header%}
+            <title>Title</title>
+        {% endblock %}
+        <link rel="stylesheet" type="text/css" href="/assets/styles/base.css">
+        <link rel="stylesheet" type="text/css" href="/assets/styles/reset.css">
+        {% block stylesheet %}{% endblock %}
+    </head>
+    <body>
+
+        <!-- Container -->
+        <div id="container">
+            <!-- Header -->
+            <div id="header">
+                <div id="branding">
+                    {% block branding %}
+                        <h1>Apiyux.com</h1>
+                    {% endblock %}
+                </div>
+                <div id="user-tools">
+                    <strong>ABCD</strong>.
+                    <a href="{{ student }}">View students</a>
+                    /
+                </div>
+            </div>
+            <!-- END Header -->
+
+            <div class="breadcrumbs">
+                <div class="box">
+                    <a href="/">Home</a>
+                    <a href="/fileupload">File-Upload</a>
+                    <a href="/filelist">File-List</a>
+                </div>
+            </div>
+            {# <ul class="messagelist"><li></li></ul>#}
+
+            <!-- Content -->
+            <div id="content" class="{% block coltype %}{% endblock %}">
+                {% block content %}
+                    {{ content }}
+                {% endblock %}
+                <br class="clear">
+            </div>
+            <!-- END Content -->
+
+        </div>
+        {% block script %}{% endblock %}
+    </body>
+</html>

@@ -26,7 +26,7 @@ function getFilePathAction(req, res) {
 
 // 上传页面
 router.get('/fileupload', (req, res) => {
-    res.render('files/upload', { title: '文件管理系统', o: 'active' });
+    res.render('upload', { o: 'active' });
 });
 
 // 上传chunks
@@ -76,7 +76,7 @@ router.post('/merge_chunks', (req, res) => {
             // 追加写入到文件中
             fs.appendFileSync(savePath, cs);
             // 删除本次使用的chunk
-            //fs.unlinkSync(chunkDir + hash + '-' + i);
+            // fs.unlinkSync(chunkDir + hash + '-' + i);
         }
         // 删除chunk的文件夹
         // fs.rmdirSync(chunkDir);
@@ -90,18 +90,19 @@ router.post('/merge_chunks', (req, res) => {
 // 返回文件
 router.get('/uploads/:dir/:path', (req, res) => {
     const url = path.resolve(__dirname, `../${fileBasePath}/${req.params.dir}/${req.params.path}`);
-    // res.type('png').sendFile(url);
     res.sendFile(url);
 });
 
-router.get('/getfilelist/:path', (req, res) => {
+// 文件列表
+router.get('/filelist/:path', (req, res) => {
     let result = getFilePathAction(req, res);
-    res.render('files/list', { title: '文件列表', chunks: result.chunks, path: result.rootPath });
+    res.render('listing', { chunks: result.chunks, path: result.rootPath });
 });
 
-router.get('/getfilelist', (req, res) => {
+// 文件列表
+router.get('/filelist', (req, res) => {
     let result = getFilePathAction(req, res);
-    res.render('files/list', { title: '文件列表', chunks: result.chunks, path: result.rootPath });
+    res.render('listing', { chunks: result.chunks, path: result.rootPath });
 });
 
 

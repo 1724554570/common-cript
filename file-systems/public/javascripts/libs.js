@@ -36,7 +36,7 @@ function libs() {}
 /**
  * 获取UUID,GUID字符
  */
-libs.prototype.get_Guid = function() {
+libs.prototype.getUUID = function() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0;
         var v = c == 'x' ? r : (r & 0x3 | 0x8);

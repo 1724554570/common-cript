@@ -1,0 +1,20 @@
+{% extends "base/base.njk" %}
+
+{% block header %}
+    <title>文件列表</title>
+{% endblock %}
+{% block content %}
+    <ul class="list">
+        {% for item in chunks -%}
+            {% if (path) %}
+                <li>
+                    <a href="/uploads/{{path}}{{item}}">{{item}}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="/filelist/{{item}}">{{item}}</a>
+                </li>
+            {% endif %}
+        {%- endfor %}
+    </ul>
+{% endblock %}

@@ -17,7 +17,7 @@ function CanvasClass() {
  * @param {type} type
  * @returns {undefined}
  */
-CanvasClass.prototype.imagesCrossOrigin = function (path, image, type) {
+function imagesCrossOrigin(path, image, type) {
     type = type ? type : '*';
     var reg = /(http|https):\/\/([\w.]+\/?)\S*/;
     if (reg.test(path)) {
@@ -26,30 +26,38 @@ CanvasClass.prototype.imagesCrossOrigin = function (path, image, type) {
     image.src = path;
 };
 
-CanvasClass.prototype.createDraw = function (path) {
-    var self = this;
+CanvasClass.prototype.createDraw = async function(path) {
     path = path ? path : "/images/ico/file-stystems.png";
-    var image = new Image();
-    self.imagesCrossOrigin(path, image);
-    var base64;
-    image.onload = function () {
-        var draw_width = image.width > self.canvas.width ? self.canvas.width : image.width;
-        var draw_height = image.height > self.canvas.height ? self.canvas.height : image.height;
-        self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
-        self.ctx.translate(0, 0);
-        self.ctx.save();
-        self.ctx.drawImage(image, 0, 0, draw_width, draw_height);
-        self.ctx.restore();
-        base64 = self.canvas.toDataURL("image/png", 1.0);
-        if (document.querySelector('#draw-images-show')) {
-            document.querySelector('#draw-images-show').setAttribute('src', base64);
-        }
-        console.log(base64);
+    var _this = this;
+    var image = await loadImageAsync(path);
+    var _imageW = image.width;
+    var _imageH = image.height;
+    var _pointerX = (_this.canvas.width - image.width) / 2;
+    var _pointerY = (_this.canvas.height - image.height) / 2;
+    _this.ctx.clearRect(0, 0, _this.canvas.width, _this.canvas.height);
+    _this.ctx.translate(0, 0);
+    _this.ctx.save();
+    _this.ctx.drawImage(image, _pointerX, _pointerY, _imageW, _imageH);
+    _this.ctx.restore();
+    var base64 = _this.canvas.toDataURL("image/png", 1.0);
+    if (document.querySelector('#draw-images-show')) {
+        document.querySelector('#draw-images-show').setAttribute('src', base64);
     }
 };
 
-CanvasClass.prototype.drawLocalImage = function () {
+CanvasClass.prototype.drawLocalImage = function() {
 
 };
 
-
+function loadImageAsync(path) {
+    return new Promise((resolve, reject) => {
+        var image = new Image();
+        imagesCrossOrigin(path, image);
+        image.onload = function() {
+            resolve(image)
+        }
+        image.onerror = function() {
+            reject(new Error("图片加载失败"))
+        }
+    });
+}
