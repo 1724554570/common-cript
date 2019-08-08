@@ -6,6 +6,16 @@
     <script src="https://cdn.bootcss.com/mdui/0.4.1/js/mdui.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 {% endblock %}
+{% block stylesheet %}
+    <style>
+        #progressListContainer {
+            margin-top: 20px;
+        }
+        #progressListContainer li {
+            list-style: none;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <div class="mdui-container">
         <div class="mdui-row">
@@ -20,7 +30,7 @@
                 </div>
             </div>
             <div class="mdui-col-md-12">
-                <h2>图片上传结果：<a href="" id="imgUrlLink" target="_blank"></a>
+                <h2>上传结果：<a href="" id="imgUrlLink" target="_blank"></a>
                 </h2>
                 <div id="imgShowContainer"></div>
             </div>
@@ -29,5 +39,5 @@
 {% endblock %}
 {% block script %}
     <script src="/javascripts/libs.js"></script>
-    <script src="/javascripts/upload.js"></script>
+    <script src="/javascripts/upload-sequence.js"></script>
 {% endblock %}

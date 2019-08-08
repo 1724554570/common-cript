@@ -42,10 +42,18 @@ router.post('/upload_chunks', uploadChunksMiddleware, (req, res) => {
     // 创建chunk的目录
     const chunkTmpDir = `${chunkBasePath}/${_object.hash}/`;
     // 判断目录是否存在
-    if (!fs.existsSync(chunkTmpDir)) fs.mkdirSync(chunkTmpDir);
+    if (!fs.existsSync(chunkTmpDir)) {
+        fs.mkdirSync(chunkTmpDir)
+    };
     // 移动切片文件
     fs.renameSync(copyPath, `${chunkTmpDir}${_object.hash}-${_object.index}`);
-    res.send(req.file);
+    res.json({
+        code: 0,
+        msg: "切片文件上传成功",
+        data: {
+            index: _object.index
+        }
+    });
 });
 
 // 文件分片
@@ -57,7 +65,7 @@ router.post('/merge_chunks', (req, res) => {
     const D = new Date();
     const total = _object.total;
     const hash = _object.hash;
-    const saveDir = `${fileBasePath}/${D.getFullYear()}${D.getMonth() + 1<10?('0'+D.getMonth() + 1):'0'+D.getMonth() + 1}${D.getDate()<10?('0'+D.getDate()):D.getDate()}`;
+    const saveDir = `${fileBasePath}/${D.getFullYear()}${D.getMonth() + 1 < 10 ? ('0' + D.getMonth() + 1) : '0' + D.getMonth() + 1}${D.getDate() < 10 ? ('0' + D.getDate()) : D.getDate()}`;
     const savePath = `${saveDir}/${hash}.${_object.ext}`;
     const chunkDir = `${chunkBasePath}/${hash}/`;
     try {
@@ -70,16 +78,16 @@ router.post('/merge_chunks', (req, res) => {
         // 读取所有的chunks 文件名存放在数组中
         const chunks = fs.readdirSync(`${chunkBasePath}/${hash}`);
         // 检查切片数量是否正确
-        if (chunks.length !== total || chunks.length === 0) return res.send({ code: -1, msg: '切片文件数量不符合' });
+        if (chunks.length !== total || chunks.length === 0) return res.json({ code: -1, msg: '切片文件数量不符合' });
         for (let i = 0; i < total; i++) {
             var cs = fs.readFileSync(chunkDir + hash + '-' + i);
             // 追加写入到文件中
             fs.appendFileSync(savePath, cs);
             // 删除本次使用的chunk
-            // fs.unlinkSync(chunkDir + hash + '-' + i);
+            fs.unlinkSync(chunkDir + hash + '-' + i);
         }
         // 删除chunk的文件夹
-        // fs.rmdirSync(chunkDir);
+        fs.rmdirSync(chunkDir);
         // 返回uploads下的路径，不返回uploads
         res.json({ code: 0, msg: '文件上传成功', data: { path: savePath.replace(`${fileBasePath}/`, '') } });
     } catch (err) {
