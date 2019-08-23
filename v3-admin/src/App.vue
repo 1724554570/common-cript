@@ -1,0 +1,65 @@
+<template>
+<!-- Container -->
+<div id="container">
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1>Apiyux.com</h1>
+        </div>
+        <div id="user-tools">
+            <strong>ABCD</strong>.
+            <a href="">View students</a>
+            /
+        </div>
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrumbs">
+        <div class="box">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/about">About</router-link>
+        </div>
+    </div>
+    <!-- <ul class="messagelist"><li></li></ul> -->
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}{% endblock %}">
+        <div id="app">
+            <div id="nav">
+                <router-link to="/">Home</router-link> |
+                <router-link to="/about">About</router-link>
+            </div>
+            <router-view />
+        </div>
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+</div>
+</template>
+
+<style lang="scss">
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Bold-webfont.woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Regular-webfont.woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@import 'assets/styles/base.scss';
+@import 'assets/styles/reset.scss';
+</style>

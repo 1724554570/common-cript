@@ -1,0 +1,23 @@
+div.breadcrumbs {
+    background: #79aec8;
+    padding: 10px 40px;
+    border: none;
+    font-size: 14px;
+    color: #c4dce8;
+    text-align: left;
+}
+
+div.breadcrumbs a {
+    color: #fff;
+    text-decoration: none;
+}
+
+// div.breadcrumbs a:focus,
+// div.breadcrumbs a:hover {
+//     color: #c4dce8;
+// }
+.breadcrumbs {
+    a.router-link-exact-active {
+        font-weight: bold;
+    }
+}
