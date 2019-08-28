@@ -4,10 +4,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 40px;
+    // padding: 10px 40px;
     background: #417690;
     color: #ffc;
     overflow: hidden;
+}
+
+#header .box {
+    width: 1200px;
+    margin: auto;
 }
 
 #header a:link,
