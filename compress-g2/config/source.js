@@ -23,10 +23,10 @@ let config = {
         src: {
             copyFile: project + "/**/**.{mp3,json,swf,woff,woff2,eot,svg,ttf}",
             tools: "./tools/*.js",
-            images: [project + "/**/**.{png,jpg,gif,ico}"],
+            images: project + "/**/**.{png,jpg,gif,ico}",
             font: project + "/font/*",
-            css: [project + "/**/**.css"],
-            js: [project + "/**/**.js"],
+            css: project + "/**/**.css",
+            js: project + "/**/**.js",
             jshtml: [project + "/js/**/**.html"],
             html: [project + "/**/**.html"]
         },

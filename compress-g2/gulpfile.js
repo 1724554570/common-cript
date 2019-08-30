@@ -21,11 +21,11 @@
         task.revImage,
         task.revFont,
         task.revCss,
-        task.revJs
+        // task.revJs
     ];
     //版本替换
     var t_version = [
-        // task.revCollectorCss,
+        task.revCollectorCss,
         task.revCollectorHtml
     ];
     //压缩文件

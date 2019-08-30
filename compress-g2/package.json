@@ -15,6 +15,7 @@
     "author": "YX-J",
     "license": "ISC",
     "devDependencies": {
+        "@miop/rev": "^0.0.4",
         "chalk": "^2.4.1",
         "gulp": "^3.9.1",
         "gulp-cache": "^0.4.5",
@@ -35,7 +36,6 @@
         "live-server": "^1.2.0"
     },
     "dependencies": {
-        "@miop/rev": "^0.0.3",
         "archiver": "^2.1.1",
         "clean-webpack-plugin": "^0.1.18",
         "css-loader": "^0.23.1",

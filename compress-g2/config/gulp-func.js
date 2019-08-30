@@ -37,32 +37,33 @@ MainInitialization.prototype.revFiles = function () {
     var cachePath = config.dir.dist.version;
     gulp.task(task.revImage, function () {
         return gulp.src(config.source.src.images)
-                .pipe(rev())
-                .pipe(gulp.dest(cachePath))
-                .pipe(rev.manifest("image-manifest.json", {filePath: config.CDN, fileHash: config.IMAGES_Hash}))
-                .pipe(gulp.dest(config.dir.rev.revFile));
+            .pipe(rev())
+            .pipe(gulp.dest(cachePath))
+            .pipe(rev.manifest("image-manifest.json", { filePath: config.CDN, fileHash: false }))
+            .pipe(gulp.dest(config.dir.rev.revFile));
     });
     gulp.task(task.revFont, function () {
         return gulp.src(config.source.src.font)
-                .pipe(rev())
-                .pipe(gulp.dest(cachePath))
-                .pipe(rev.manifest("fonts-manifest.json", {filePath: config.CDN, fileHash: config.SCRIPT_Hash}))
-                .pipe(gulp.dest(config.dir.rev.revFile));
+            .pipe(rev())
+            .pipe(gulp.dest(cachePath))
+            .pipe(rev.manifest("fonts-manifest.json", { filePath: config.CDN }))
+            .pipe(gulp.dest(config.dir.rev.revFile));
     });
     gulp.task(task.revCss, function () {
-        return gulp.src(config.source.src.css)
-                .pipe(rev())
-                .pipe(gulp.dest(cachePath))
-                .pipe(rev.manifest("style-manifest.json", {filePath: config.CDN, fileHash: config.SCRIPT_Hash}))
-                .pipe(gulp.dest(config.dir.rev.revFile));
+        return gulp.src([config.source.src.css, config.source.src.js])
+            // return gulp.src([config.source.src.css])
+            .pipe(rev())
+            .pipe(gulp.dest(cachePath))
+            .pipe(rev.manifest("static-manifest.json", { filePath: config.CDN }))
+            .pipe(gulp.dest(config.dir.rev.revFile));
     });
-    gulp.task(task.revJs, function () {
-        return gulp.src(config.source.src.js)
-                .pipe(rev())
-                .pipe(gulp.dest(cachePath))
-                .pipe(rev.manifest("script-manifest.json", {filePath: config.CDN, fileHash: config.SCRIPT_Hash}))
-                .pipe(gulp.dest(config.dir.rev.revFile));
-    });
+    // gulp.task(task.revJs, function () {
+    //     return gulp.src(config.source.src.js)
+    //             .pipe(rev())
+    //             .pipe(gulp.dest(cachePath))
+    //             .pipe(rev.manifest("script-manifest.json", {filePath: config.CDN}))
+    //             .pipe(gulp.dest(config.dir.rev.revFile));
+    // });
 };
 
 /**
@@ -74,7 +75,7 @@ MainInitialization.prototype.replaceFilesPath = function () {
     // 替换样式中静态文件引用路径
     gulp.task(task.revCollectorCss, function () {
         let srcSou = checkArray([config.source.rev.revFile], config.source.src.css);
-        return gulp.src(srcSou).pipe(revCollector()).pipe(gulp.dest(config.dir.revCollector.css));
+        return gulp.src(srcSou).pipe(revCollector({ isStyle: true })).pipe(gulp.dest(config.dir.revCollector.css));
     });
 
     // 替换页面中静态文件引用路径
@@ -91,7 +92,7 @@ MainInitialization.prototype.replaceFilesPath = function () {
 MainInitialization.prototype.compressFiles_Html = function () {
     var gulp = this.gulp;
     let public_parms = function () {
-        let boolean = true, _boolean = false;
+        let boolean = false, _boolean = false;
         return {
             //清除HTML注释
             removeComments: boolean,
@@ -116,18 +117,18 @@ MainInitialization.prototype.compressFiles_Html = function () {
     gulp.task(task.minJsHtml, function () {
         let srcSou = checkArray([], config.source.src.jshtml);
         return gulp.src(srcSou)
-                .pipe(minHtmlForJT()) // 压缩页面上的javascript模板
-                .pipe(minHtml(public_parms()))// 压缩页面上的style,javascript
-                .pipe(gulp.dest(config.dir.dist.release));
+            .pipe(minHtmlForJT()) // 压缩页面上的javascript模板
+            .pipe(minHtml(public_parms()))// 压缩页面上的style,javascript
+            .pipe(gulp.dest(config.dir.dist.release));
     });
 
     // PC 版
     gulp.task(task.minHtml, function () {
         let srcSou = checkArray([], config.source.revCollector.html);
         return gulp.src(srcSou)
-                .pipe(minHtml(public_parms()))
-                .pipe(gulp.dest(config.dir.dist.release))
-                .pipe(gulp.dest(config.dir.dist.version));
+            .pipe(minHtml(public_parms()))
+            .pipe(gulp.dest(config.dir.dist.release))
+            .pipe(gulp.dest(config.dir.dist.version));
     });
 };
 
@@ -141,26 +142,28 @@ MainInitialization.prototype.compressFiles_CSSJS = function () {
     let releasePath = config.dir.dist.release;
     gulp.task(task.minCss, function () {
         let srcSou = checkArray([], config.staticHash ? config.source.revCollector.CSS : config.source.src.css);
-        return gulp.src(srcSou).pipe(minCss()).pipe(gulp.dest(releasePath));
+        return gulp.src(srcSou)
+            // .pipe(minCss())
+            .pipe(gulp.dest(releasePath));
     });
 
     gulp.task(task.minJs, function () {
         let srcSou = checkArray([], config.staticHash ? config.source.revCollector.JS : config.source.src.js);
         return gulp.src(srcSou)
-                .pipe(uglify({}).on('error', function (e) {
-                    console.log("---------- minJs-Error ----------");
-                    console.log(chalk.red(e));
-                    console.log("---------- minJs-Error ----------");
-                }))
-                .pipe(gulp.dest(releasePath));
+            .pipe(uglify({}).on('error', function (e) {
+                console.log("---------- minJs-Error ----------");
+                console.log(chalk.red(e));
+                console.log("---------- minJs-Error ----------");
+            }))
+            .pipe(gulp.dest(releasePath));
     });
 
     // 压缩图片文件
     gulp.task(task.minImage, function () {
         let srcSou = checkArray([], config.source.src.images);
         return gulp.src(srcSou)
-                .pipe(cache(minImage({progressive: false, use: [minImageForPng()]})))
-                .pipe(gulp.dest(releasePath));
+            .pipe(cache(minImage({ progressive: false, use: [minImageForPng()] })))
+            .pipe(gulp.dest(releasePath));
     });
 };
 

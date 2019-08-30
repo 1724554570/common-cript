@@ -68,7 +68,10 @@ html,body{
 	z-index: 10;
 }
 .wraper.active{
-	background-image: url(../img/bg1.jpg);
+	background-image: url(../img/ico6.png);
+}
+.wraper.active2{
+	background-image: url(bg1.jpg);
 }
 .page1 {
 	background: rgba(0,0,0,.8);
