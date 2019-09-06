@@ -18,3 +18,6 @@ file-systems/package-lock.json
 file-systems/yarn.lock
 
 test.js
+
+react-app-type/node_modules*
+react-app-type/yarn.lock
