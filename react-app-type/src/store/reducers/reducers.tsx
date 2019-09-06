@@ -1,12 +1,12 @@
 import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../const'
 import { ModifyCounterAction } from '../action'
-import { CountModel, StoreState } from '../types'
+import { ICountState, StoreState } from '../types'
 
 const initCountModel = {
     count: 0
 };
 
-const countReducer = (state: CountModel = initCountModel, action: ModifyCounterAction): CountModel => {
+const countReducer = (state: ICountState = initCountModel, action: ModifyCounterAction): ICountState => {
     switch (action.type) {
         case INCREMENT_ENTHUSIASM:
             return { ...state, count: state.count + 1 }

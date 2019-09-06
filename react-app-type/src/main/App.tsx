@@ -8,7 +8,7 @@ import About from '../templates/about/about';
 import Counter from '../components/Counter';
 
 import * as actionEvents from '../store/action';
-import { CountModel } from '../store/types'
+import { ICountState } from '../store/types'
 
 import HelloViews from '../containers/Hello';
 
@@ -29,7 +29,7 @@ const Application: React.FunctionComponent<{}> = () => {
 }
 
 
-const mapStateToProps = (state: { count: 0 }): CountModel => {
+const mapStateToProps = (state: { count: 0 }): ICountState => {
     return {
         count: state.count
     }

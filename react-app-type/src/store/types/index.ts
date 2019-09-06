@@ -4,11 +4,15 @@ export interface UserModel {
     completed: boolean;
 }
 
-export interface CountModel {
+export interface ICountState {
     count: number;
 }
 
 export interface StoreState {
     languageName: string;
     enthusiasmLevel: number;
+}
+
+export interface IStoreState {
+    count: ICountState
 }
