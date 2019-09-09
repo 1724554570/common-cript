@@ -16,3 +16,14 @@ export interface StoreState {
 export interface IStoreState {
     count: ICountState
 }
+
+// 
+export interface IAction {
+    type: string,
+    payload: any;
+}
+
+export interface IGlobalStoreState {
+    globalSyncId: string;
+    globalAsyncId: string;
+}

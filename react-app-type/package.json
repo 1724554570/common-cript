@@ -73,7 +73,22 @@
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules":{
+      "no-mixed-operators": [
+        "error",
+        {
+          "groups": [
+              ["+", "-", "*", "/", "%", "**"],
+              ["&", "|", "^", "~", "<<", ">>", ">>>"],
+              ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+              ["&&", "||"],
+              ["in", "instanceof"]
+          ],
+          "allowSamePrecedence": true
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -141,6 +156,7 @@
     "@types/react-redux": "^7.1.2",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   }
 }

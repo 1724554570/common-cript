@@ -1,45 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Route, NavLink } from "react-router-dom";
+import { BrowserRouter as BRouter } from "react-router-dom";
+// import { HashRouter as Router } from "react-router-dom";
+// Styles
 import './App.css';
-
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-
-import About from '../templates/about/about';
+// PageViews
+import About from '../containers/about/about';
 import Counter from '../components/Counter';
-
-import * as actionEvents from '../store/action';
-import { ICountState } from '../store/types'
-
 import HelloViews from '../containers/Hello';
 
+// Components
 const Application: React.FunctionComponent<{}> = () => {
-    const [count, setCount] = useState<number>(0);
+
     return (
-        <>
-            <div className="count-view">{count}</div>
-            <button onClick={() => setCount(count - 1)}>onIncrement</button>
-            <button onClick={() => setCount(count + 1)}>onDecrement</button>
-            <About />
-            <div>{}</div>
-            <Counter />
-            <div></div>
-            <HelloViews />
-        </>
+        <BRouter>
+            <div className="nav-container">
+                <NavLink to="/" >Home Page</NavLink>
+                <NavLink to="/test">HelloViews Page</NavLink>
+                <NavLink to="/about">About Page</NavLink>
+            </div>
+            <Route exact path="/" component={Counter} />
+            <Route path="/test" component={HelloViews} />
+            <Route path="/about" component={About} />
+        </BRouter>
     );
 }
 
-
-const mapStateToProps = (state: { count: 0 }): ICountState => {
-    return {
-        count: state.count
-    }
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<actionEvents.ModifyCounterAction>) => {
-    return {
-        onIncrement: () => dispatch(actionEvents.increment()),
-        onDecrement: () => dispatch(actionEvents.decrement())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Application);
+export default Application;
