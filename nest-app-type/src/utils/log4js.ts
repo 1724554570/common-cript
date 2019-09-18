@@ -2,8 +2,6 @@ import * as path from 'path';
 import { configure, getLogger } from 'log4js';
 
 const resolve = (dir: string) => {
-    // tslint:disable-next-line: no-console
-    console.log(path.join(__dirname, dir));
     return path.join(__dirname, dir);
 };
 
@@ -38,6 +36,6 @@ configure({
     },
 });
 
-const logger = getLogger('cheese');
+// const logger = getLogger('cheese');
 
-export default logger;
+export const Logger = getLogger('cheese');
