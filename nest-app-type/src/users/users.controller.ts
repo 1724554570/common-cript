@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-user.dto';
 import { Users } from './interfaces/users.interface';
 import { UsersService } from './users.service';
 import { Message } from '../global/message';
+import { QueryParams } from '../global/query';
 
 function TestData() {
     const random = Math.random();
@@ -22,8 +23,11 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) { }
 
     @Get('/list')
-    async findAll(): Promise<Message> {
-        const users = await this.usersService.findAll();
+    async findAll(@Query() q: QueryParams): Promise<Message> {
+        if (!q.pageSize) {
+            q.pageSize = 10;
+        }
+        const users = await this.usersService.findAll(q);
         return { code: 200, message: '查询成功', data: users };
     }
 

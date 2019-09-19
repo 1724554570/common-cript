@@ -3,6 +3,7 @@ import { Users } from './interfaces/users.interface';
 import { createGuid, getTimeStamp } from '../utils/utils';
 import { Logger } from '../utils/log4js';
 import { Model } from 'mongoose';
+import { QueryParams } from '../global/query';
 
 @Injectable()
 export class UsersService {
@@ -50,10 +51,11 @@ export class UsersService {
   }
 
   /**
-   * 查询所有用户
+   * 查询所有用户(分页类型)
    */
-  async findAll(): Promise<Users[]> {
-    return await this.userModel.find().exec();
+  async findAll(q: QueryParams = { page: 1, pageSize: 10 }): Promise<Users[]> {
+    const skipSize = (q.page - 1) * q.pageSize;
+    return await this.userModel.find().sort({ atime: 'asc' }).skip(skipSize).limit(q.pageSize).exec();
   }
 
 }
