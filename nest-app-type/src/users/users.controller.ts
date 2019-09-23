@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query,Render } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-user.dto';
 import { Users } from './interfaces/users.interface';
 import { UsersService } from './users.service';
@@ -23,6 +23,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) { }
 
     @Get('/list')
+    @Render('users/list.hbs')
     async findAll(@Query() q: QueryParams): Promise<Message> {
         if (!q.pageSize) {
             q.pageSize = 10;

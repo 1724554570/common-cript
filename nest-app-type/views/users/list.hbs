@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>UserList</title>
+</head>
+
+<body>
+    <div>
+        <img src="/public/assets/icon/30px/payorder.png" alt="" />
+    </div>
+  <ul>
+      {{#each data}}
+      <li>
+          <span>{{uuid}}</span>
+          <span>{{name}}</span>
+          <span>{{atime}}</span>
+      </li>
+      {{/each}}
+  </ul>
+</body>
+
+</html>
