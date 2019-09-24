@@ -1,9 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Users } from './interfaces/users.interface';
-import { createGuid, getTimeStamp } from '../utils/utils';
-import { Logger } from '../utils/log4js';
 import { Model } from 'mongoose';
-import { QueryParams } from '../global/query';
+// 工具
+import { createGuid, getTimeStamp } from '../../utils/utils';
+import { Logger } from '../../utils/log4js';
+import { QueryParams } from '../../global/query';
+// 业务逻辑
+import { Users } from '../interfaces/users.interface';
 
 @Injectable()
 export class UsersService {
@@ -48,6 +50,11 @@ export class UsersService {
     updateData.utime = mf;
     updateData.updated = time;
     return await this.userModel.updateOne({ uuid: id }, { $set: updateData }).exec();
+  }
+
+  async findByNamePassword(uname: string, password: string): Promise<Users> {
+    const res = await this.userModel.findOne().or([{ name: uname }, { phone: uname }]).exec();
+    return res;
   }
 
   /**

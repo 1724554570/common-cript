@@ -1,15 +1,3 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-
-
 
 ## Description
 
@@ -47,24 +35,40 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
-
-
 ## Kill Port
-```sh
+```
 netstat -nao | findstr 3000
 
 taskkill /f /pid 10988 
+```
+
+
+## Use Command
+```
+generate(简写：g) 生成文件
+class (简写: cl) 类
+controller (简写: co) 控制器
+decorator (简写: d) 装饰器
+exception (简写: e) 异常捕获
+filter (简写: f) 过滤器
+gateway (简写: ga) 网关
+guard (简写: gu) 守卫
+interceptor (简写: i) 拦截器
+middleware (简写: mi) 中间件
+module (简写: mo) 模块
+pipe (简写: pi) 管道
+provider (简写: pr) 供应商
+service (简写: s) 服务
+```
+
+## Auth
+```
+yarn add -D @nestjs/passport passport 
+yarn add -D passport-local @types/passport-local
+yarn add -D @nestjs/jwt passport-jwt @types/passport-jwt
+```
+
+## 结构
+```
+strategy  策略
 ```

@@ -11,4 +11,5 @@ export const UserSchema = new mongoose.Schema({
     created: Date,
     updated: Date,
     valid: { type: Number, default: 1 },
+    status: { type: Number, default: 1 },
 });

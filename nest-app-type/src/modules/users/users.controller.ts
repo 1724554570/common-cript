@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Param, Query,Render } from '@nestjs/common';
-import { CreateUsersDto } from './dto/create-user.dto';
-import { Users } from './interfaces/users.interface';
+import { Controller, Get, Post, Body, Param, Query, Render, UseInterceptors, Logger } from '@nestjs/common';
+import { CreateUsersDto } from '../dto/create-user.dto';
+import { Users } from '../interfaces/users.interface';
 import { UsersService } from './users.service';
-import { Message } from '../global/message';
-import { QueryParams } from '../global/query';
+import { Message } from '../../global/message';
+import { QueryParams } from '../../global/query';
+import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
+import { UStatus, UStatusRes } from '../../constants/const';
 
 function TestData() {
     const random = Math.random();
@@ -18,6 +20,7 @@ function TestData() {
 }
 
 @Controller('users')
+@UseInterceptors(LoggingInterceptor)
 export class UsersController {
 
     constructor(private readonly usersService: UsersService) { }
@@ -53,6 +56,20 @@ export class UsersController {
     @Post('/remove/:id')
     async remove(@Param('id') id): Promise<Message> {
         return await this._update(id, { valid: 0 });
+    }
+
+    @Post('login')
+    async login(@Body('name') name, @Body('password') password) {
+        if (!name || !password) {
+            return { code: 201, message: 'params is invalid', data: {} };
+        }
+        const res = await this.usersService.findByNamePassword(name, password);
+        console.log(res);
+        if (res.valid != 1) {
+            return { code: 201, message: UStatusRes[res.valid], data: {} };
+        }
+        res.password = '********';
+        return { code: 200, message: '查询成功', data: res };
     }
 
     /**

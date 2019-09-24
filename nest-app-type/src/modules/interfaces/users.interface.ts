@@ -1,6 +1,7 @@
 export interface Users {
     uuid?: string;
     name: string;
+    password?: string;
     age: number;
     sex: string;
     valid?: number | 1;
