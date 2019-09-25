@@ -26,7 +26,6 @@ export class UsersService {
       users.created = time;
       users.updated = time;
     }
-    Logger.info(`UsersController create UserId=${users.uuid}~${time}~${JSON.stringify(users)}`);
     const createUsers = new this.userModel(users);
     return await createUsers.save();
   }
@@ -52,9 +51,8 @@ export class UsersService {
     return await this.userModel.updateOne({ uuid: id }, { $set: updateData }).exec();
   }
 
-  async findByNamePassword(uname: string, password: string): Promise<Users> {
-    const res = await this.userModel.findOne().or([{ name: uname }, { phone: uname }]).exec();
-    return res;
+  async findByName(username: string): Promise<Users> {
+    return await this.userModel.findOne().or([{ username }, { phone: username }]).exec();
   }
 
   /**

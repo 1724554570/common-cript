@@ -1,26 +1,40 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Model } from 'mongoose';
 // 工具
-import { Message } from '../../global/message';
-// 状态
-import { UStatus, UStatusRes } from '../../constants/const';
-// 业务逻辑
-import { Users } from '../interfaces/users.interface';
+import Base64 from '../../utils/base64';
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        @Inject('USERS_MODEL') private readonly userModel: Model<Users>,
         private readonly jwtService: JwtService,
+        @Inject('UsersService') private readonly usersService,
     ) { }
 
-    async vlidateUser(username: string, password: string): Promise<Message> {
-        const res = await this.userModel.findOne().or([{ name: username }, { phone: username }]).exec();
-        console.log(res);
+    async validateUser(username: string, usePassword: string): Promise<any> {
+        const res = await this.usersService.findByName(username);
+        if (!res) {
+            throw new UnauthorizedException('用户名不存在。');
+        }
+        const basePassword = Base64.encode(usePassword);
+        const dbPassword = res.password;
+        if (dbPassword != basePassword) {
+            throw new UnauthorizedException('密码错误。');
+        }
+        // replace(/(\d{2})(?=\d)/g, '$1 ').split(' ');
+        res.password = '********';
+        const token = this.signToken(res);
+        return token;
+    }
 
-        return { code: 200, message: '查询成功', data: res };
+    signToken(user: any) {
+        const { username, uuid, _id } = user;
+        const payload = { username, uuid, _id };
+        return {
+            username,
+            uuid,
+            token: 'Bearer ' + this.jwtService.sign(payload),
+        };
     }
 
 }

@@ -3,7 +3,8 @@ import * as mongoose from 'mongoose';
 
 export const UserSchema = new mongoose.Schema({
     uuid: String,
-    name: String,
+    username: String,
+    password: String,
     age: Number,
     sex: String,
     atime: Number,
