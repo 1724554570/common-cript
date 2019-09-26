@@ -9,17 +9,18 @@ import { AuthService } from '../modules/auth/auth.service';
  * 把用户信息存储到user中的类,继承内置类PassportStrategy、重写validate方法
  */
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) { // 继承PassportStrategy方法抛出的类，传递一个Strategy ,第二个参数是自定义的加密的字符串
+export class LocalStrategy extends PassportStrategy(Strategy, 'local') { // 继承PassportStrategy方法抛出的类，传递一个Strategy ,第二个参数是自定义的加密的字符串
 
-    constructor(private readonly authService: AuthService) { // 依赖注入服务
-        super(); // 并且调用父类的构造函数
+    constructor(private readonly authService: AuthService) {
+        super();
     }
 
-    public async validate(username: string, password: string): Promise<any> {
-        const user = await this.authService.validateUser(username, password); // （模拟）去数据库 验证是否成功
+    async validate(username: string, password: string): Promise<any> {
+        console.log(`LocalStrategy validate`);
+        const user = await this.authService.validateUser(username, password);
         if (!user) {
             throw new UnauthorizedException(); // 抛出未授权异常
         }
-        return user; // validate()方法返回的值自动创建一个对象，并将其分配给Request对象:获取例如：req.user
+        return user;
     }
 }

@@ -13,15 +13,16 @@ export class LoggingInterceptor implements NestInterceptor {
         Logger.info(`Before...${controller}-${handler}`);
         return next.handle().pipe(
             catchError((err) => {
-                Logger.error(`After...${JSON.stringify(err)}`);
-                return throwError(new HttpException('拦截错误', HttpStatus.BAD_GATEWAY));
+                Logger.error(`Exception...${JSON.stringify(err)}`);
+                return throwError(new HttpException({ status: err.status, message: err.response, data: null }, err.status));
             }),
-            tap((res) => {
-                Logger.info(`After_tap...`);
-                return res;
-            }),
+            // tap((res) => { }),
             map((res) => {
-                Logger.info(`After_map...${JSON.stringify(res)}`);
+                if ('findAll' === handler) {
+                    Logger.info(`Result...查询成功`);
+                } else {
+                    Logger.info(`Result...${JSON.stringify(res)}`);
+                }
                 return res;
             })
         );

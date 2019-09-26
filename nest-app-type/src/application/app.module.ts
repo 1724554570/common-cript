@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+// import { PassportModule } from '@nestjs/passport';
+// import { JwtModule } from '@nestjs/jwt';
 //
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -15,13 +15,13 @@ import { AuthModule } from '../modules/auth/auth.module';
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      privateKey: 'secretKey',
-      signOptions: {
-        expiresIn: '3600s',
-      },
-    }),
+    // PassportModule.register({ defaultStrategy: 'jwt' }),
+    // JwtModule.register({
+    //   privateKey: 'secretKey',
+    //   signOptions: {
+    //     expiresIn: '3600s',
+    //   },
+    // }),
     UsersModule,
     AuthModule
   ],

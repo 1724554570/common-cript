@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Param, Query, Render, UseInterceptors, Logger, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Render, UseInterceptors, Logger, UseGuards, Inject } from '@nestjs/common';
 import { CreateUsersDto } from '../dto/create-user.dto';
 import { Users } from '../interfaces/users.interface';
-import { UsersService } from './users.service';
 import { Message } from '../../global/message';
 import { QueryParams } from '../../global/query';
 import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
@@ -12,10 +11,10 @@ import { AuthGuard } from '@nestjs/passport';
 @UseInterceptors(LoggingInterceptor)
 export class UsersController {
 
-    constructor(private readonly usersService: UsersService) { }
+    constructor(@Inject('UsersService') private readonly usersService) { }
 
     @Get('/list')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Render('users/list.hbs')
     async findAll(@Query() q: QueryParams): Promise<Message> {
         if (!q.pageSize) {
@@ -26,27 +25,27 @@ export class UsersController {
     }
 
     @Get('/find/:id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     async find(@Param('id') id): Promise<Message> {
         const users = await this.usersService.findByid(id);
         return { code: 200, message: '查询成功', data: users };
     }
 
     @Post('/create')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     async create(@Body() createUsersDto: CreateUsersDto) {
         const res = await this.usersService.create(createUsersDto);
         return { code: 200, message: '创建成功', data: [], Res: res && res.uuid || '' };
     }
 
     @Post('/update/:id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     async update(@Param('id') id, @Body() body): Promise<Message> {
         return await this._update(id, body);
     }
 
     @Post('/remove/:id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     async remove(@Param('id') id): Promise<Message> {
         return await this._update(id, { valid: 0 });
     }

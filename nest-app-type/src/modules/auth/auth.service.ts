@@ -1,7 +1,8 @@
-import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Inject, UnauthorizedException, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 // 工具
 import Base64 from '../../utils/base64';
+import jwtSecret from '../../constants/jwt.constant';
 
 @Injectable()
 export class AuthService {
@@ -14,14 +15,14 @@ export class AuthService {
     async validateUser(username: string, usePassword: string): Promise<any> {
         const res = await this.usersService.findByName(username);
         if (!res) {
-            throw new UnauthorizedException('用户名不存在。');
+            throw new HttpException('用户名不存在。', HttpStatus.ACCEPTED);
         }
         const basePassword = Base64.encode(usePassword);
         const dbPassword = res.password;
         if (dbPassword != basePassword) {
             throw new UnauthorizedException('密码错误。');
         }
-        // replace(/(\d{2})(?=\d)/g, '$1 ').split(' ');
+
         res.password = '********';
         const token = this.signToken(res);
         return token;
@@ -33,7 +34,14 @@ export class AuthService {
         return {
             username,
             uuid,
-            token: 'Bearer ' + this.jwtService.sign(payload),
+            token: this.jwtService.sign(payload),
+        };
+    }
+
+    signIn() {
+        const user = { email: 'user@email.com' };
+        return {
+            token: this.jwtService.sign(user)
         };
     }
 

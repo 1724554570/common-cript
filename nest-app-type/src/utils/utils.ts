@@ -1,7 +1,11 @@
+// replace(/(\d{2})(?=\d)/g, '$1 ').split(' ');
+/**
+ * create UUID
+ */
 function createGuid() {
     const stringKey = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
     // tslint:disable-next-line: only-arrow-functions
-    return stringKey.replace(/[xy]/g, function (c: string) {
+    return stringKey.replace(/[xy]/g, function(c: string) {
         // tslint:disable-next-line: no-bitwise
         const r: number = Math.random() * 16 | 0;
         // tslint:disable-next-line: no-bitwise triple-equals
