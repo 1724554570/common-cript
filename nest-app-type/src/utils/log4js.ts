@@ -5,6 +5,17 @@ const resolve = (dir: string) => {
     return path.join(__dirname, dir);
 };
 
+function fmtNumber(val) {
+    return val < 10 ? `0${val}` : val;
+}
+function getTimeDirectory() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const mouth = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}${fmtNumber(mouth)}${fmtNumber(day)}`;
+}
+
 configure({
     appenders: {
         // 控制台输出
@@ -14,28 +25,51 @@ configure({
         console: {
             type: 'console',
         },
-        cheese: {
-            // 以文件格式存储
+        // 正常日志
+        info: {
             type: 'dateFile',
-            // 打印日志级别${trace,debug,info,warn,error,fatal}
-            level: 'trace',
-            // category分类
-            category: 'cheese',
-            // 自动创建${filename-pattern}文件
-            filename: resolve('../log/cheese.log'),
+            filename: resolve(`../log/${getTimeDirectory()}/info.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
-            // 包含模型
             alwaysIncludePattern: true,
+            maxLogSize: 1024 * 1024 * 2,
+            backups: 100
         },
+        // 错误日志
+        err: {
+            type: 'dateFile',
+            filename: resolve(`../log/${getTimeDirectory()}/err.log`),
+            pattern: 'yyyy-MM-dd',
+            keepFileExt: true,
+            alwaysIncludePattern: true,
+            maxLogSize: 1024 * 1024 * 2,
+            backups: 100
+        },
+        // 错误日志
+        out: {
+            type: 'dateFile',
+            filename: resolve(`../log/${getTimeDirectory()}/out.log`),
+            pattern: 'yyyy-MM-dd',
+            keepFileExt: true,
+            alwaysIncludePattern: true,
+            maxLogSize: 1024 * 1024 * 2,
+            backups: 100
+        },
+
     },
     categories: {
-        default: {
-            appenders: ['cheese'], level: 'trace',
-        },
+        default: { appenders: ['info'], level: 'info', },
+        err: { appenders: ['err'], level: 'error' },
+        out: { appenders: ['out'], level: 'debug' },
     },
 });
 
-// const logger = getLogger('cheese');
+const Logger = getLogger('info');
+const LoggerError = getLogger('err');
+const LoggerOther = getLogger('out');
 
-export const Logger = getLogger('cheese');
+export {
+    Logger,
+    LoggerError,
+    LoggerOther
+};
