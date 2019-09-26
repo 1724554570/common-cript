@@ -1,0 +1,37 @@
+{% extends "base/base.njk" %}
+
+{% block header %}
+    <title>文件列表</title>
+{% endblock %}
+{% block stylesheet %}
+    <style>
+        .list {
+            margin-top: 20px;
+        }
+        .list li {
+            list-style: none;
+            line-height: 28px;
+        }
+        .list li a {
+            display: block;
+        }
+        .list li:hover {
+            background: #EDEDED;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <ul class="list">
+        {% for item in chunks -%}
+            {% if (path) %}
+                <li>
+                    <a href="/uploads/{{path}}{{item}}">{{item}}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="/filelist/{{item}}">{{item}}</a>
+                </li>
+            {% endif %}
+        {%- endfor %}
+    </ul>
+{% endblock %}

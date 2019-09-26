@@ -1,0 +1,37 @@
+//out:false
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@maxWidth: 1200px;
+
+.header {
+    * {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    position: fixed;
+    z-index: 9;
+    border-bottom: 1px solid #555;
+    width: 100%;
+    min-height: 45px;
+}
+
+.min-header {
+    position: relative;
+    height: 45px;
+}
+
+.content {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: @maxWidth;
+    margin: auto;
+}
+
+.footer {
+    position: relative;
+}

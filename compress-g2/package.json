@@ -1,0 +1,53 @@
+{
+    "name": "cc-gulp",
+    "version": "1.0.0",
+    "description": "gulp study",
+    "main": "gulpfile.js",
+    "keywords": [
+        "gulp"
+    ],
+    "scripts": {
+        "start": "gulp",
+        "build": "gulp && npm run webpack",
+        "upload": "webpack --progress --hide-modules --config config/webpack.prod.config.js",
+        "server": "live-server --port=4201"
+    },
+    "author": "YX-J",
+    "license": "ISC",
+    "devDependencies": {
+        "@miop/rev": "^0.0.4",
+        "chalk": "^2.4.1",
+        "gulp": "^3.9.1",
+        "gulp-cache": "^0.4.5",
+        "gulp-clean": "^0.3.2",
+        "gulp-clean-css": "^2.0.11",
+        "gulp-cli": "^2.0.1",
+        "gulp-css-spriter": "^0.4.0",
+        "gulp-htmlmin": "^2.0.0",
+        "gulp-imagemin": "^3.4.0",
+        "gulp-jshint": "^2.1.0",
+        "gulp-minify-html": "^1.0.6",
+        "gulp-rev": "^7.1.0",
+        "gulp-rev-collector": "^1.2.4",
+        "gulp-sequence": "^0.4.5",
+        "gulp-uglify": "^1.5.4",
+        "imagemin-pngquant": "^5.0.0",
+        "jshint": "^2.10.1",
+        "live-server": "^1.2.0"
+    },
+    "dependencies": {
+        "archiver": "^2.1.1",
+        "clean-webpack-plugin": "^0.1.18",
+        "css-loader": "^0.23.1",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "file-loader": "^0.8.5",
+        "fs": "0.0.1-security",
+        "html-loader": "^0.3.0",
+        "html-webpack-plugin": "^2.30.1",
+        "md5": "^2.2.1",
+        "request": "^2.83.0",
+        "url-loader": "^0.6.2",
+        "webpack": "^3.10.0",
+        "webpack-merge": "^4.1.1"
+    }
+}

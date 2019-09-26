@@ -1,0 +1,13 @@
+.list {
+  display: block;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.list li {
+  border-bottom: 1px solid #000;
+  font-size: 14px;
+  line-height: 24px;
+}
+.list a {
+  text-decoration: none;
+}

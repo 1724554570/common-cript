@@ -1,0 +1,13 @@
+{% extends "base/base.njk" %}
+
+{% block header %}
+    <title>{{title}}</title>
+    <script src="/javascripts/CanvasClass.js"></script>
+{% endblock %}
+{% block content %}
+    <img id="draw-images-show" src="" alt=""/>
+    <script>
+        let canvas = new CanvasClass();
+        canvas.createDraw('https://www.baidu.com/img/bd_logo1.png?where=super');
+    </script>
+{% endblock %}

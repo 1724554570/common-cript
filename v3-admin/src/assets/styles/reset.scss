@@ -1,0 +1,44 @@
+#app {
+    color: #2c3e50;
+}
+
+#nav {
+    padding: 30px;
+}
+
+#nav a {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+    color: #42b983;
+}
+
+#header {
+    line-height: 50px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+#content {
+    max-width: 1200px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+div.breadcrumbs {
+    line-height: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+div.breadcrumbs .box {
+    max-width: 1200px;
+    margin: auto;
+}
+
+div.breadcrumbs a {
+    padding: 0px 12px;
+}
