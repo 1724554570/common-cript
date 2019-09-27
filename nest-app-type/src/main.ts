@@ -9,17 +9,17 @@ async function bootstrap() {
   // const app = await NestFactory.create<NestExpressApplication>(ApplicationModule);
   const app = await NestFactory.create<NestFastifyApplication>(
     ApplicationModule,
-    new FastifyAdapter(),
+    // new FastifyAdapter(),
   );
 
   //
   const staticPath = join(__dirname, '..', 'public');
   const viewsPath = join(__dirname, '..', 'views');
 
-  app.useStaticAssets({
-    root: staticPath,
-    prefix: '/public/',
-  });
+  // app.useStaticAssets({
+  //   root: staticPath,
+  //   prefix: '/public/',
+  // });
 
   app.setViewEngine({
     engine: {

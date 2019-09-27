@@ -1,11 +1,27 @@
 // replace(/(\d{2})(?=\d)/g, '$1 ').split(' ');
+import { join } from 'path';
+
+function resolve(dir: string) {
+    return join(__dirname, '..', dir);
+}
+
+function fmtNumber(val) {
+    return val < 10 ? `0${val}` : val;
+}
+function getTimeDirectory() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const mouth = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}${fmtNumber(mouth)}${fmtNumber(day)}`;
+}
 /**
  * create UUID
  */
 function createGuid() {
     const stringKey = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
     // tslint:disable-next-line: only-arrow-functions
-    return stringKey.replace(/[xy]/g, function(c: string) {
+    return stringKey.replace(/[xy]/g, function (c: string) {
         // tslint:disable-next-line: no-bitwise
         const r: number = Math.random() * 16 | 0;
         // tslint:disable-next-line: no-bitwise triple-equals
@@ -21,4 +37,6 @@ function getTimeStamp() {
 export {
     createGuid,
     getTimeStamp,
+    resolve,
+    getTimeDirectory,
 };

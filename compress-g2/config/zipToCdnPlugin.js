@@ -3,7 +3,6 @@ let fs = require('fs');
 let md5 = require('md5');
 let archiver = require('archiver');
 let chalk = require("chalk");
-var out = process.stdout;
 
 /**
  * 初始化 上传插件设置
@@ -73,96 +72,9 @@ toCdnPlugin.prototype.apply = function (compiler) {
 
     });
 
-    let readSize = 1 * 1024 * 1024;
-
-    var hash = guid_2();
-    function getServerResponse(data, index) {
-        var url = 'http://inner.up.cdn.qq.com:8080/uploadserver/uploadfile.jsp';
-        url = 'http://127.0.0.1:3000/upload_chunks';
-        request({
-            url: url,
-            method: 'POST',
-            headers: {
-                'X-CDN-Authentication': opts.token
-            },
-            body: data,
-            qs: {
-                index: index,
-                ext: 'zip',
-                hash: hash,
-                total: (function (filepath) {
-                    return Math.ceil(fs.statSync(filepath).size / readSize);
-                })(zipFilePath),
-
-                appname: opts.appname,
-                user: opts.username,
-                filename: opts.buildpath,
-                filetype: 'zip',
-                filepath: (opts.path + opts.buildpath),
-                filesize: (function (filepath) {
-                    return fs.statSync(filepath).size;
-                })(zipFilePath),
-                filemd5: (function (filepath) {
-                    return md5(fs.readFileSync(filepath)).toLowerCase();
-                })(zipFilePath),
-                isunzip: 1
-            }
-        }, function (a, b, message) {
-            console.log(message);
-            //fs.unlinkSync(zipFilePath);
-            //_Logger('{ ' + zipFilePath + ' upload success. }');
-        });
-    }
-
     function upload() {
         //zipFilePath = "jfinal-3.3_demo.zip";
         //zipFilePath = "uploads2.zip";
-        var readStream = fs.createReadStream(zipFilePath, {
-            flags: 'r',
-            highWaterMark: readSize,
-            mode: 0666
-        });
-
-        //读取文件发生错误事件
-        readStream.on('error', (err) => {
-            console.log('发生异常:', err);
-        });
-
-        //已打开要读取的文件事件
-        readStream.on('open', (fd) => {
-            console.log('文件已打开:', fd);
-        });
-
-        //文件已经就位，可用于读取事件
-        readStream.on('ready', () => {
-            console.log('文件已准备好..');
-        });
-
-        var index = 0;
-        //文件读取中事件·····
-        readStream.on('data', (chunk) => {
-            console.log('read %d bytes: %s', chunk.length, zipFilePath);
-//            console.log(`file bytes - ${
-//                    (function (filepath) {
-//                        var filesize = fs.statSync(filepath).size;
-//                        return Math.ceil(filesize / (1 * 1024 * 1024));
-//                    })(zipFilePath)
-//                    }`);
-            getServerResponse(chunk, index);
-            index += 1;
-        });
-
-        //文件读取完成事件
-        readStream.on('end', () => {
-            console.log('读取已完成..');
-        });
-
-        //文件已关闭事件
-        readStream.on('close', () => {
-            console.log('文件已关闭！');
-        });
-
-        return;
         fs.readFile(zipFilePath, function (err, data) {
             if (err) {
                 console.log(err);

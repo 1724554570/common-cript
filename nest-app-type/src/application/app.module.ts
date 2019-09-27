@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 // 注入模块
 import { UsersModule } from '../modules/users/users.module';
 import { AuthModule } from '../modules/auth/auth.module';
+import { UploadModule } from '../modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { AuthModule } from '../modules/auth/auth.module';
     //   },
     // }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    UploadModule
   ],
   controllers: [AppController],
   providers: [AppService],
