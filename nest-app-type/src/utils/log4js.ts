@@ -1,20 +1,5 @@
-import * as path from 'path';
 import { configure, getLogger } from 'log4js';
-
-const resolve = (dir: string) => {
-    return path.join(__dirname, dir);
-};
-
-function fmtNumber(val) {
-    return val < 10 ? `0${val}` : val;
-}
-function getTimeDirectory() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const mouth = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}${fmtNumber(mouth)}${fmtNumber(day)}`;
-}
+import { resolve, getTimeDirectory } from '../utils/utils';
 
 configure({
     appenders: {
@@ -28,7 +13,7 @@ configure({
         // 正常日志
         info: {
             type: 'dateFile',
-            filename: resolve(`../log/${getTimeDirectory()}/info.log`),
+            filename: resolve(`log/${getTimeDirectory()}/info.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
             alwaysIncludePattern: true,
@@ -38,7 +23,7 @@ configure({
         // 错误日志
         err: {
             type: 'dateFile',
-            filename: resolve(`../log/${getTimeDirectory()}/err.log`),
+            filename: resolve(`log/${getTimeDirectory()}/err.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
             alwaysIncludePattern: true,
@@ -48,7 +33,7 @@ configure({
         // 错误日志
         out: {
             type: 'dateFile',
-            filename: resolve(`../log/${getTimeDirectory()}/out.log`),
+            filename: resolve(`log/${getTimeDirectory()}/out.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
             alwaysIncludePattern: true,
