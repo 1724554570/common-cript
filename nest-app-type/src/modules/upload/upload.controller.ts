@@ -2,11 +2,22 @@ import { Controller, Post, UseInterceptors, UploadedFile, Body, HttpException, H
 import { FileInterceptor } from '@nestjs/platform-express';
 import multer = require('multer');
 import { resolve, getTimeDirectory } from '../../utils/utils';
+import { mkdirsSync } from '../../utils/fs';
 
 @Controller('upload')
 export class UploadController {
 
-    constructor() { }
+    constructor() {
+        // privted  pathUrl = isExistDir();
+        this.isExistDir();
+    }
+
+    /**
+     *
+     */
+    isExistDir() {
+        mkdirsSync(resolve(`uploads/${getTimeDirectory()}`));
+    }
 
     @Post('file')
     @UseInterceptors(FileInterceptor('file', {
@@ -21,5 +32,11 @@ export class UploadController {
     }))
     async uploade(@UploadedFile() file) {
         return file;
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFile(@UploadedFile() file) {
+        console.log(file);
     }
 }
