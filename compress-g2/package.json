@@ -15,7 +15,7 @@
     "author": "YX-J",
     "license": "ISC",
     "devDependencies": {
-        "@miop/rev": "^0.0.4",
+        "@miop/rev": "^0.0.6",
         "chalk": "^2.4.1",
         "gulp": "^3.9.1",
         "gulp-cache": "^0.4.5",

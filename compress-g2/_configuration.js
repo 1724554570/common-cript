@@ -40,8 +40,8 @@ let Gulp_Configuration_parameter = {
  * webpack上传cdn配置信息
  */
 let Webpack_Upload_Cdn_Configuration_parameter = {
-    "token": "7D1E69CE868DD68F4AD2A4F49C86B3BE",
-    "username": "v_yuxjiang",
+    "token": "",
+    "username": "",
     "appname": "mig_market",
 //    "base": "http://3gimg.qq.com/",
     "base": "http://127.0.0.1:3001/upload",
