@@ -14,7 +14,11 @@ async function bootstrap() {
   // app.useStaticAssets('public');
   // app.setBaseViewsDir('views');
 
-  app.useStaticAssets(staticPath);
+  // app.useStaticAssets(staticPath);
+  app.useStaticAssets(staticPath, {
+    prefix: '/static/',
+  });
+
   app.setBaseViewsDir(viewsPath);
 
   app.setViewEngine('hbs');

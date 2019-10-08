@@ -4,22 +4,32 @@
 <head>
   <meta charset="utf-8" />
   <title>UserList</title>
-  <link href="/assets/styles/base.css" rel="stylesheet" />
+  <link href="/static/assets/styles/main.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div>
-        <img src="/assets/icon/30px/payorder.png" alt="" />
+  <div>
+    <img src="/static/assets/icon/30px/payorder.png" alt="" />
+  </div>
+  <div class="container record-container">
+    <div class="record-title">
+
     </div>
-  <ul>
+    <ul class="record-content">
       {{#each data}}
-      <li>
+      <li class="">
+        <div class="span th-0">
           <span>{{uuid}}</span>
-          <span>{{name}}</span>
-          <span>{{atime}}</span>
+        </div>
+        <div class="span th-1">{{username}}</div>
+        <div class="span th-2">{{age}}</div>
+        <div class="span th-3">{{sex}}</div>
+        <div class="span th-4">{{status}}</div>
+        <div class="span th-5">{{atime}}</div>
       </li>
       {{/each}}
-  </ul>
+    </ul>
+  </div>
   <script>
     //window.setInterval(function(){
     //  window.location.reload();
