@@ -60,7 +60,7 @@ export class UsersService {
    */
   async findAll(q: QueryParams = { page: 1, pageSize: 10 }): Promise<Users[]> {
     const skipSize = (q.page - 1) * q.pageSize;
-    return await this.userModel.find().sort({ atime: 'asc' }).skip(skipSize).limit(q.pageSize).exec();
+    return await this.userModel.find().sort({ atime: 'asc' }).skip(skipSize).limit(q.pageSize * 1).exec();
   }
 
 }

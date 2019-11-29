@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { rejects } from 'assert';
 
 interface IOpt {
     dirname: string;
@@ -34,16 +35,29 @@ function mkdirs(dirname: string, callback?: any) {
  */
 function mkdirsSync(dirname: string) {
     if (fs.existsSync(dirname)) {
+        console.log(dirname, '33');
         return true;
     } else {
-        if (mkdirsSync(path.dirname(dirname))) {
+        const dirnamePointer = path.dirname(dirname);
+        if (mkdirsSync(dirnamePointer)) {
             fs.mkdirSync(dirname);
-            return true;
+            return false;
         }
     }
+}
+
+function promiseMkdir(dirname: string) {
+    return new Promise((reslut, reject) => {
+        const res = mkdirsSync(dirname);
+        console.log(res);
+        if (res) {
+            reslut(true);
+        }
+    });
 }
 
 export {
     mkdirs,
     mkdirsSync,
+    promiseMkdir,
 };

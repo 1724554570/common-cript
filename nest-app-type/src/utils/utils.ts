@@ -1,8 +1,12 @@
 // replace(/(\d{2})(?=\d)/g, '$1 ').split(' ');
 import { join } from 'path';
 
-function resolve(dir: string) {
+function resolveDir(dir: string) {
     return join(__dirname, '..', dir);
+}
+
+function resolvePath(params: string) {
+    return join(__dirname, params);
 }
 
 function fmtNumber(val) {
@@ -37,6 +41,7 @@ function getTimeStamp() {
 export {
     createGuid,
     getTimeStamp,
-    resolve,
+    resolveDir,
+    resolvePath,
     getTimeDirectory,
 };

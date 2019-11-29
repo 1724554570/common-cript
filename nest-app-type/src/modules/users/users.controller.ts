@@ -15,7 +15,7 @@ export class UsersController {
 
     @Get('/list')
     // @UseGuards(AuthGuard('jwt'))
-    @Render('users/list.hbs')
+    // @Render('users/list.hbs')
     async findAll(@Query() q: QueryParams): Promise<Message> {
         if (!q.pageSize) {
             q.pageSize = 10;

@@ -29,7 +29,7 @@ async function bootstrap() {
     templates: viewsPath,
   });
 
-  await app.listen(3000);
+  await app.listen(3001);
 
   // const app = await NestFactory.createMicroservice(ApplicationModule, {
   //   transport: Transport.TCP,

@@ -1,5 +1,5 @@
 import { configure, getLogger } from 'log4js';
-import { resolve, getTimeDirectory } from '../utils/utils';
+import { resolveDir, getTimeDirectory } from '../utils/utils';
 
 configure({
     appenders: {
@@ -13,7 +13,7 @@ configure({
         // 正常日志
         info: {
             type: 'dateFile',
-            filename: resolve(`log/${getTimeDirectory()}/info.log`),
+            filename: resolveDir(`log/${getTimeDirectory()}/info.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
             alwaysIncludePattern: true,
@@ -23,7 +23,7 @@ configure({
         // 错误日志
         err: {
             type: 'dateFile',
-            filename: resolve(`log/${getTimeDirectory()}/err.log`),
+            filename: resolveDir(`log/${getTimeDirectory()}/err.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
             alwaysIncludePattern: true,
@@ -33,7 +33,7 @@ configure({
         // 错误日志
         out: {
             type: 'dateFile',
-            filename: resolve(`log/${getTimeDirectory()}/out.log`),
+            filename: resolveDir(`log/${getTimeDirectory()}/out.log`),
             pattern: 'yyyy-MM-dd',
             keepFileExt: true,
             alwaysIncludePattern: true,

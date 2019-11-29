@@ -1,7 +1,7 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException, HttpStatus } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { Logger, LoggerError } from '../utils/log4js';
+import { Logger, LoggerError, LoggerOther } from '../utils/log4js';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -16,7 +16,9 @@ export class LoggingInterceptor implements NestInterceptor {
                 LoggerError.error(`\r\n Before      ${controller}-${handler} \r\n Exception   ${JSON.stringify(err)} \r\n`);
                 return throwError(new HttpException({ status: err.status, message: err.response, data: null }, err.status));
             }),
-            // tap((res) => { }),
+            tap((res) => {
+                LoggerOther.info(`\r\n Before      ${controller}-${handler} \r\n Exception   ${JSON.stringify(res)} \r\n`);
+            }),
             map((res) => {
                 // if ('findAll' === handler) {
                 //     Logger.info(`\r\n Before   ${controller}-${handler} \r\n Result   查询成功 \r\n`);
