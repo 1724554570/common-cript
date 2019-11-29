@@ -73,8 +73,6 @@ toCdnPlugin.prototype.apply = function (compiler) {
     });
 
     function upload() {
-        //zipFilePath = "jfinal-3.3_demo.zip";
-        //zipFilePath = "uploads2.zip";
         fs.readFile(zipFilePath, function (err, data) {
             if (err) {
                 console.log(err);
@@ -85,7 +83,7 @@ toCdnPlugin.prototype.apply = function (compiler) {
                 return;
             }
             request({
-                url: url,
+                url: opts.base,
                 method: 'POST',
                 headers: {
                     'X-CDN-Authentication': opts.token
@@ -105,10 +103,9 @@ toCdnPlugin.prototype.apply = function (compiler) {
                     })(zipFilePath),
                     isunzip: 1
                 }
-            }, function (a, b, message) {
-                console.log(message);
-                //fs.unlinkSync(zipFilePath);
-                //_Logger('{ ' + zipFilePath + ' upload success. }');
+            }, function (error, response, message) {
+                console.log(`${message}`);
+                fs.unlinkSync(zipFilePath);
             });
         });
     }

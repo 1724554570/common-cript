@@ -40,11 +40,12 @@ let Gulp_Configuration_parameter = {
  * webpack上传cdn配置信息
  */
 let Webpack_Upload_Cdn_Configuration_parameter = {
-    "token": "",
+    "token": "c392c227-de84-4903-abce-60b001bdd7a8",
     "username": "",
     "appname": "mig_market",
 //    "base": "http://3gimg.qq.com/",
-    "base": "http://127.0.0.1:3001/upload",
+    "base": "http://127.0.0.1:3000/upload/buffer",
+    // "base": "http://127.0.0.1/thinkphp5024/public/api/index/upload",
     "zipPath": uploadPath,
 
     // 上传至Sem落地页目录
