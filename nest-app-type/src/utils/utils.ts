@@ -38,10 +38,29 @@ function getTimeStamp() {
     return Math.floor(new Date().getTime());
 }
 
+function getZero(val) {
+    return val < 10 ? `0${val}` : val;
+}
+
+function getFormatDate(type) {
+    let res = "";
+    let c = new Date();
+    let y = c.getFullYear();
+    let m = c.getMonth() + 1;
+    let d = c.getDate();
+    let m1 = getZero(m);
+    let d1 = getZero(d);
+    if (type == 'ymd') {
+        return [y, m1, d1].join('');
+    }
+    return res;
+}
+
 export {
     createGuid,
     getTimeStamp,
     resolveDir,
     resolvePath,
     getTimeDirectory,
+    getFormatDate,
 };

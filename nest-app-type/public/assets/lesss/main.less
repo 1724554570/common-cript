@@ -117,3 +117,77 @@
         }
     }
 }
+
+
+.c-table {
+    width          : 100%;
+    clear          : both;
+    border-collapse: collapse;
+    border-spacing : 0;
+
+    tbody {
+        width: 100%;
+    }
+
+    tr {
+        cursor     : pointer;
+        height     : 40px;
+        line-height: 40px;
+        position   : relative;
+
+        // &:after {
+        //     content            : " ";
+        //     background-position: 0 0;
+        //     background-color   : #e5e5e5;
+        //     width              : 1182px;
+        //     height             : 1px;
+        //     position           : absolute;
+        //     bottom             : 0px;
+        //     left               : 0;
+        // }
+    }
+
+    td {
+        margin: 0;
+    }
+
+    tbody {
+        tr {
+            -webkit-transition: all .3s linear;
+            -moz-transition   : all .3s linear;
+            -o-transition     : all .3s linear;
+            transition        : all .3s linear;
+
+            &:hover {
+                background: #fff;
+                box-shadow: rgba(3, 3, 8, .15) 0 0 38px;
+                transform : translateY(-5px);
+            }
+        }
+    }
+
+    th,
+    td {
+        padding       : 0;
+        border        : 1px solid #bbd4e8;
+        text-align    : center;
+        vertical-align: moddle;
+    }
+
+    .c-right {
+        text-align   : right;
+        padding-right: 10px;
+    }
+
+    .c-red {
+        color: red;
+    }
+
+    .c-green {
+        color: green;
+    }
+
+    .c-bold {
+        font-weight: bold;
+    }
+}

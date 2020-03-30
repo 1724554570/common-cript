@@ -24,6 +24,17 @@ export class UsersController {
         return { code: 200, message: '查询成功', data: users };
     }
 
+    // 视图查看用户列表
+    @Get('/views')
+    @Render('users/list.hbs')
+    async findAllViews(@Query() q: QueryParams): Promise<Message> {
+        if (!q.pageSize) {
+            q.pageSize = 10;
+        }
+        const users = await this.usersService.findAll(q);
+        return { code: 200, message: '查询成功', data: users };
+    }
+
     @Get('/find/:id')
     // @UseGuards(AuthGuard('jwt'))
     async find(@Param('id') id): Promise<Message> {

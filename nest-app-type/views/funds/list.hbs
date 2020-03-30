@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>UserList</title>
+  <link href="/static/assets/styles/main.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container record-container">
+    <table class="c-table">
+      <thead>
+        <tr>
+          <th class="">投入日期</th>
+          <th class="">基金代码</th>
+          <th class="">基金名称</th>
+          <th class="">基金价格</th>
+          <th class="">投入资金</th>
+          <th class="">持有份额</th>
+          <th class="">当前价格</th>
+          <th class="">盈亏</th>
+          <th class="">收益</th>
+          <th class="">百分比</th>
+          <th class="">确认日期</th>
+          <th class="">是否7天</th>
+          <th class="">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data}}
+        <tr>
+          <td class="">{{useTime}}</td>
+          <td class="">{{fundCode}}</td>
+          <td class="">{{fundNmae}}</td>
+          <td class="c-right">{{fundPrice}}</td>
+          <td class="c-right c-bold">{{usePrice}}</td>
+          <td class="c-right">{{useTotal}}</td>
+          <td class="c-right">{{nowPrice}}</td>
+
+          {{#if abs}}
+          <td class="c-right c-red">{{profitLoss}}</td>
+          {{else}}
+          <td class="c-right c-green">{{profitLoss}}</td>
+          {{/if}}
+
+          {{#if abs}}
+          <td class="c-right c-red">{{getPrice}}</td>
+          {{else}}
+          <td class="c-right c-green">-{{getPrice}}</td>
+          {{/if}}
+
+          {{#if abs}}
+          <td class="c-right c-red">{{lossPercent}}%</td>
+          {{else}}
+          <td class="c-right c-green">{{lossPercent}}%</td>
+          {{/if}}
+          
+          <td class="">{{useTime2}}</td>
+          <td class="">{{validDay}}</td>
+          <td class=""><a href="/funds/remove/{{_id}}">DELETE</a></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{!-- <div> {{Res}}</div> --}}
+  <script>
+    //var list =;
+    //window.setInterval(function(){
+    //  window.location.reload();
+    //},200);
+  </script>
+</body>
+
+</html>

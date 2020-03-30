@@ -19,7 +19,7 @@ async function bootstrap() {
 
   app.useStaticAssets({
     root: staticPath,
-    prefix: '/public/',
+    prefix: '/static/',
   });
 
   app.setViewEngine({

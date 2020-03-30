@@ -59,6 +59,8 @@ module (简写: mo) 模块
 pipe (简写: pi) 管道
 provider (简写: provider) 供应商
 service (简写: s) 服务
+
+nest g controller
 ```
 
 ## Auth
