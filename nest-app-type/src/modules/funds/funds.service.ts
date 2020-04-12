@@ -52,7 +52,7 @@ export default class FundsService {
    */
   async findAll(q: QueryParams = { page: 1, pageSize: 10 }): Promise<Funds[]> {
     const skipSize = (q.page - 1) * q.pageSize;
-    const search = q.text ? { fundCode: q.text } : {};
+    const search = q.text ? { fundCode: q.text, unUse: 0 } : { unUse: 0 };
     return await this.useModel.find(search).sort({ atime: 'asc' }).skip(skipSize).limit(q.pageSize * 1).exec();
   }
 
@@ -81,8 +81,12 @@ export default class FundsService {
         if (profitLoss > 0) {
           abs = 1;
         }
+        let unUse = 0;
+        if (data.unUse) {
+          unUse = 1;
+        }
         let getPrice = (data.usePrice * (+lossPercentArr.join('.') / 100)).toString();
-        let updateForm = { profitLoss: Math.abs(profitLoss2), lossPercent: lossPercentArr.join('.'), getPrice, nowPrice: body.nowPrice, abs, validDay };
+        let updateForm = { profitLoss: Math.abs(profitLoss2), lossPercent: lossPercentArr.join('.'), getPrice, nowPrice: body.nowPrice, abs, validDay, unUse };
         // console.log(updateForm);
         let r = await this.useModel.updateOne({ _id: data['_id'], fundCode: body.fundCode }, { $set: updateForm }).exec();
         if (r.nModified) {
@@ -97,6 +101,17 @@ export default class FundsService {
   // 删除数据
   async deleteFunds(id: string) {
     return this.useModel.deleteOne({ _id: id });
+  }
+
+  // 卖出数据
+  async useFunds(id: string) {
+    let r = await this.useModel.updateOne({ _id: id }, {
+      $set: {
+        unUse: 1
+      }
+    }).exec();
+    return r;
+    // return this.useModel.deleteOne({ _id: id });
   }
 
 }

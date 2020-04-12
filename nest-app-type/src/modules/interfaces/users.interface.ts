@@ -34,6 +34,8 @@ export interface Funds {
     getPrice?: string,
     // 盈亏百分比
     lossPercent?: number,
+    // 卖出份额
+    unUse?: number,
     created?: number,
     updated?: number,
 }

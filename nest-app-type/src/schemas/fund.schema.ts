@@ -26,6 +26,8 @@ export const FundsSchema = new mongoose.Schema({
     getPrice: Number,
     // 盈亏百分比
     lossPercent: String,
+    // 卖出
+    unUse: Number,
 
     created: Date,
     updated: Date,

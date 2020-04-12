@@ -12,9 +12,9 @@
     <table class="c-table">
       <thead>
         <tr>
-          <th class="">投入日期</th>
+          {{!-- <th class="">投入日期</th> --}}
           <th class="">基金代码</th>
-          <th class="">基金名称</th>
+          {{!-- <th class="">基金名称</th> --}}
           <th class="">基金价格</th>
           <th class="">投入资金</th>
           <th class="">持有份额</th>
@@ -22,7 +22,7 @@
           <th class="">盈亏</th>
           <th class="">收益</th>
           <th class="">百分比</th>
-          <th class="">确认日期</th>
+          {{!-- <th class="">确认日期</th> --}}
           <th class="">是否7天</th>
           <th class="">Action</th>
         </tr>
@@ -30,9 +30,9 @@
       <tbody>
         {{#each data}}
         <tr>
-          <td class="">{{useTime}}</td>
+          {{!-- <td class="">{{useTime}}</td> --}}
           <td class="">{{fundCode}}</td>
-          <td class="">{{fundNmae}}</td>
+          {{!-- <td class="">{{fundNmae}}</td> --}}
           <td class="c-right">{{fundPrice}}</td>
           <td class="c-right c-bold">{{usePrice}}</td>
           <td class="c-right">{{useTotal}}</td>
@@ -55,15 +55,23 @@
           {{else}}
           <td class="c-right c-green">{{lossPercent}}%</td>
           {{/if}}
-          
-          <td class="">{{useTime2}}</td>
+
+          {{!-- <td class="">{{useTime2}}</td> --}}
           <td class="">{{validDay}}</td>
-          <td class=""><a href="/funds/remove/{{_id}}">DELETE</a></td>
+          <td class="">
+            {{#if unUse}}
+            <a href="/funds/remove/{{_id}}">DELETE</a>
+            {{/if}}
+            {{#if unUse}}
+            {{else}}<a href="/funds/use/{{_id}}">USE</a>
+            {{/if}}
+          </td>
         </tr>
         {{/each}}
       </tbody>
     </table>
   </div>
+  {{!-- <div>{{data}}</div> --}}
   {{!-- <div> {{Res}}</div> --}}
   <script>
     //var list =;

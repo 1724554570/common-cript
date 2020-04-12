@@ -69,6 +69,11 @@ export default class FundsController {
         return await this.fundsService.deleteFunds(id);
     }
 
+    @Get("/use/:id")
+    async useById(@Param('id') id) {
+        return await this.fundsService.useFunds(id);
+    }
+
     /**
      * 修改&删除
      * @param id uuid

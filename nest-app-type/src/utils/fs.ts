@@ -35,7 +35,6 @@ function mkdirs(dirname: string, callback?: any) {
  */
 function mkdirsSync(dirname: string) {
     if (fs.existsSync(dirname)) {
-        console.log(dirname, '33');
         return true;
     } else {
         const dirnamePointer = path.dirname(dirname);
