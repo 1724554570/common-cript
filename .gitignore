@@ -19,8 +19,8 @@ file-systems/yarn.lock
 
 test.js
 
+react-app-type/dist*
 react-app-type/node_modules*
-react-app-type/yarn.lock
 
 nest-app-type/dist*
 nest-app-type/node_modules*

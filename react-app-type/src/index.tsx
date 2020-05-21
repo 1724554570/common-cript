@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import "antd/dist/antd.css";
+import './assets/less/users.css';
 import './assets/styles/index.css';
 import App from './main/App';
 import * as serviceWorker from './serviceWorker';

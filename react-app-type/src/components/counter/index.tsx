@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import * as action from '../store/action';
+import * as action from '../../store/action';
 
 const Counter = ({ dispatch }: { dispatch: Dispatch }) => {
 

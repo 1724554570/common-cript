@@ -5,7 +5,7 @@ import { Message } from '../../global/message';
 import { QueryParams } from '../../global/query';
 import { LoggingInterceptor } from '../../interceptors/logging.interceptor';
 import { UStatus, UStatusRes } from '../../constants/const';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 @UseInterceptors(LoggingInterceptor)
@@ -22,6 +22,12 @@ export class UsersController {
         }
         const users = await this.usersService.findAll(q);
         return { code: 200, message: '查询成功', data: users };
+    }
+
+    @Get('/list2')
+    async  v() {
+        let data = { username: "admin", password: "admin", sex: "1", age: 20 };
+        return this.create(data);
     }
 
     // 视图查看用户列表

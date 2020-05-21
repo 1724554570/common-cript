@@ -1,10 +1,10 @@
-import Hello from '../components/Hello';
-import * as actions from '../store/action';
+import Login from '../../components/users/login';
+import * as actions from '../../store/action';
 // import { ICountState } from '../store/types';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { IStoreState } from '../global/types';
+import { IStoreState } from '../../global/types';
 
 
 const mapStateToProps = (state: IStoreState) => {
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch: Dispatch<actions.ModifyCounterAction>) => 
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hello);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
