@@ -17,11 +17,16 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  // 开启跨域设置
+  app.enableCors();
+
+  // 设置静态文件代理前缀
   app.useStaticAssets({
     root: staticPath,
     prefix: '/static/',
   });
 
+  // 设置视图模板类型
   app.setViewEngine({
     engine: {
       handlebars: require('handlebars'),
@@ -29,6 +34,7 @@ async function bootstrap() {
     templates: viewsPath,
   });
 
+  // 设置监听接口
   await app.listen(3001);
 
   // const app = await NestFactory.createMicroservice(ApplicationModule, {

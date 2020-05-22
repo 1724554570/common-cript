@@ -19,3 +19,10 @@ export class CreateFundsDto {
     readonly useTime: string;
     readonly useTime2: string;
 }
+
+
+export class CreateTaxDto {
+    readonly totalPrice: number;
+    readonly updatePrice: number;
+    readonly discount: number;
+}

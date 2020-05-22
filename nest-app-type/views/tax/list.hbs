@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>UserList</title>
+  <link href="/static/assets/styles/main.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container record-container">
+    <div class="record-title">
+      <div class="span th-0">UUID</div>
+      <div class="span th-1">NickName</div>
+      <div class="span th-2">Age</div>
+      <div class="span th-3">Sex</div>
+      <div class="span th-4">Status</div>
+      <div class="span th-5">Time</div>
+    </div>
+    <ul class="record-content">
+      {{#each data}}
+      <li class="">
+        <div class="span th-0">
+          <span>{{uuid}}</span>
+        </div>
+        <div class="span th-1">{{username}}</div>
+        <div class="span th-2">{{age}}</div>
+        <div class="span th-3">{{sex}}</div>
+        <div class="span th-4">{{status}}</div>
+        <div class="span th-5">{{atime}}</div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  <script>
+    //window.setInterval(function(){
+    //  window.location.reload();
+    //},200);
+  </script>
+</body>
+
+</html>

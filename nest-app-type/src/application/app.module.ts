@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { UsersModule } from '../modules/users/users.module';
 import { AuthModule } from '../modules/auth/auth.module';
 import { FundsModule } from '../modules/funds/funds.module';
+import { TaxModule } from '../modules/tax/tax.module';
 import { UploadModule } from '../modules/upload/upload.module';
 
 @Module({
@@ -27,6 +28,7 @@ import { UploadModule } from '../modules/upload/upload.module';
     UsersModule,
     AuthModule,
     FundsModule,
+    TaxModule,
     UploadModule
   ],
   controllers: [AppController],
