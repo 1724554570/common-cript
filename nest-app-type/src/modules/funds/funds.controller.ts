@@ -17,6 +17,11 @@ export default class FundsController {
             q.pageSize = 10;
         }
         const users = await this.fundsService.findAll(q);
+        let val = 0;
+        users.forEach((r: any) => [
+            val += r.getPrice
+        ])
+        console.log(val)
         return { code: 200, message: '查询成功', data: users };
     }
 

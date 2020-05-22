@@ -58,7 +58,6 @@ export default class FundsService {
 
   // 更基金值
   async updateAll(body: any) {
-    // console.log(body);
     let collection = await this.findAll({ page: 1, pageSize: 1000 });
     let length = collection && collection.length > 0;
     let res = [];
@@ -86,8 +85,8 @@ export default class FundsService {
           unUse = 1;
         }
         let getPrice = (data.usePrice * (+lossPercentArr.join('.') / 100)).toString();
+        getPrice = Number(getPrice).toFixed(2);
         let updateForm = { profitLoss: Math.abs(profitLoss2), lossPercent: lossPercentArr.join('.'), getPrice, nowPrice: body.nowPrice, abs, validDay, unUse };
-        // console.log(updateForm);
         let r = await this.useModel.updateOne({ _id: data['_id'], fundCode: body.fundCode }, { $set: updateForm }).exec();
         if (r.nModified) {
           r.id = data['_id'];
