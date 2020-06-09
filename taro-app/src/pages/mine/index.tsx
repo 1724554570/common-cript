@@ -1,7 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text, Image } from '@tarojs/components'
-import { Swiper, SwiperItem } from '@tarojs/components'
+import { View, Button, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
@@ -78,45 +77,12 @@ class Index extends Component {
 
   render () {
     return (
-      <View className='context index'>
-        <Swiper
-          className='banner-box'
-          indicatorColor='#999'
-          indicatorActiveColor='#333'
-          circular
-          indicatorDots
-          autoplay>
-          <SwiperItem>
-            <View className='demo-text-1'>1</View>
-          </SwiperItem>
-          <SwiperItem>
-            <View className='demo-text-2'>2</View>
-          </SwiperItem>
-          <SwiperItem>
-            <View className='demo-text-3'>3</View>
-          </SwiperItem>
-        </Swiper>
-        {/* Nav */}
-        <View className="nav-box"></View>
-        {/* Goods */}
-        <View className="home-goods-box">
-          <View className="item-goods">
-            <View className="goods-thumb">
-              <Image className="c-thumb" src="http://cb-bucket.oss-cn-qingdao.aliyuncs.com/speed-dir/1591082742690_20200602152532.png"></Image>
-            </View>
-            <View className="goods-info">
-              <View className="goods-name">onClickonClickonClickonClick</View>
-              <View className="goods-desc">onClickonClickonClickonClickonClickonClick</View>
-            </View>
-          </View>
-        </View>
-        {/*
+      <View className='index'>
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
         <View><Text>{this.props.counter.num}</Text></View>
         <View><Text>Hello, World</Text></View>
-        */}
       </View>
     )
   }
